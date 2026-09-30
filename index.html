@@ -129,6 +129,10 @@
             overflow-wrap: anywhere;
         }
 
+        .agreement-tract-line {
+            margin-top: 4px;
+        }
+
         .agreement-meta {
             color: var(--text-muted);
             font-size: 0.78em;
@@ -195,12 +199,6 @@
         .agreement-pill-pdf {
             border-color: #ff737d;
             color: #ff9299;
-        }
-
-        .agreement-pill-tract {
-            border-color: #52c9a5;
-            color: #70d9b7;
-            max-width: min(360px, 45vw);
         }
 
         .agreement-os-status {
@@ -901,8 +899,8 @@
                     const pdfPill = documentUrl
                         ? `<a class="agreement-pill agreement-pill-pdf" href="${escapeHtml(documentUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le PDF de l'accord">PDF ↗</a>`
                         : '';
-                    const tractPill = tractUrl && agreement.tract && agreement.tract !== '-'
-                        ? `<a class="agreement-pill agreement-pill-tract" href="${escapeHtml(tractUrl)}" target="_blank" rel="noopener noreferrer" title="Tract : ${escapeHtml(agreement.tract)}">Tract · ${escapeHtml(agreement.tract)} ↗</a>`
+                    const tractLink = tractUrl && agreement.tract && agreement.tract !== '-'
+                        ? `<a class="agreement-link agreement-tract-link" href="${escapeHtml(tractUrl)}" target="_blank" rel="noopener noreferrer" title="Ouvrir le tract : ${escapeHtml(agreement.tract)}">${escapeHtml(agreement.tract)} ↗</a>`
                         : '';
 
                     return `
@@ -913,10 +911,10 @@
                                         ${pdfPill}
                                         <span class="agreement-title">${escapeHtml(agreement.title)}</span>
                                         <span class="agreement-validity ${validityClass}" title="${escapeHtml(validityTitle)}" aria-label="${escapeHtml(validityLabel)}">${validityText}</span>
-                                        ${tractPill}
                                     </div>
                                     <span class="agreement-meta">${agreement.year} · ${escapeHtml(agreement.site)}</span>
                                     <span class="agreement-content">${escapeHtml(agreement.content || '—')}</span>
+                                    ${tractLink ? `<div class="agreement-tract-line">${tractLink}</div>` : ''}
                                 </div>
                             </div>
                             <div class="agreement-status">${organizationStatuses}</div>
