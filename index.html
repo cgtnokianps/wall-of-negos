@@ -107,6 +107,10 @@
         .agreement-heading {
             display: grid;
             gap: 5px;
+
+        .agreement-link.agreement-meta-link {
+            color: #4da3ff;
+        }
         }
 
         .agreement-title {
@@ -261,29 +265,14 @@
     </div>
 
     <script>
-        const ACCORDS_BASE_URL = 'https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/';
-        const TRACTS_BASE_URL = 'https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/salari%C3%A9s/tracts%20diffus%C3%A9s/';
         const CGT_LOGO_URL = 'https://www.cgt.fr/themes/bluedrop/svg/logo.svg';
 
-        function getAccordUrl(fileName) {
-            const encodedFileName = encodeURIComponent(fileName);
-            return new URL(`wall-of-negos/${encodedFileName}?web=1`, ACCORDS_BASE_URL).href;
-        }
-
         function getAgreementUrl(agreement) {
-            if (agreement.link.toLowerCase() === 'cgt39' && agreement.fileName) {
-                return getAccordUrl(agreement.fileName);
-            }
-
-            return agreement.documentTarget
-                ? new URL(agreement.documentTarget, ACCORDS_BASE_URL).href
-                : '';
+            return agreement.documentTarget || '';
         }
 
         function getTractUrl(agreement) {
-            return agreement.tractTarget
-                ? new URL(agreement.tractTarget, TRACTS_BASE_URL).href
-                : '';
+            return agreement.tractTarget || '';
         }
 
         const agreementRows = [
@@ -303,7 +292,7 @@
                 "content": "Renouvellement de la politique handicap NNF (1er accord agréé en 2006 ; taux d'emploi > 6 % depuis 2020). Rôles des acteurs : salariés, people managers, santé au travail, service social, Mission handicap. Négocié du 5 juin 2025 au 16 février 2026. Avancée principale : cotisations retraite prises en charge à 100 % en temps partiel choisi (TPC).",
                 "cgtPosition": "Signataire (vote en AG extraordinaire du 21/05/2026).",
                 "tract": "-",
-                "documentTarget": "../../../BDESENNF-Centrale/_layouts/15/DocIdRedir.aspx?ID=AAIQPNNI5BUR-1489538130-830"
+                "documentTarget": "https://nokia.sharepoint.com/sites/BDESENNF-Centrale/_layouts/15/DocIdRedir.aspx?ID=AAIQPNNI5BUR-1489538130-830"
             },
             {
                 "year": "2026",
@@ -339,8 +328,8 @@
                 "content": "195 suppressions de postes ; volontariat à l'automne 2026 ; fin de carrière jusqu'à 250 000 €.",
                 "cgtPosition": "Refus de principe : « RCC 2026, c'est toujours non ».",
                 "tract": "N-ième RCC, 2ème de 2026 : retour sondage salariés (26/06/2026)",
-                "documentTarget": "../../../HRLibrary/Controlled%20Documents/Forms/AllItems.aspx?id=/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202026/Accord_RCC_2026.pdf&parent=/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202026",
-                "tractTarget": "2026/2026_06_TRACT-RetourSondageRCC2026-2.pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/Forms/AllItems.aspx?id=/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202026/Accord_RCC_2026.pdf&parent=/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202026",
+                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2026/2026_06_TRACT-RetourSondageRCC2026-2.pdf"
             },
             {
                 "year": "2026",
@@ -358,7 +347,7 @@
                 "content": "La restauration sort des activités sociales et culturelles des CSE d'établissement et passe à la Direction. Budget ASC et commission restauration revus.",
                 "cgtPosition": "Signataire.",
                 "tract": "-",
-                "documentTarget": "../../../HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/Avenant%20n%c2%ba%201%20%c3%a0%20l'Accord%20CSE%20du%2021%20septembre%202018.pdf?web=1"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/Avenant%20n%c2%ba%201%20%c3%a0%20l'Accord%20CSE%20du%2021%20septembre%202018.pdf?web=1"
             },
             {
                 "year": "2026",
@@ -376,7 +365,7 @@
                 "content": "Pas d'augmentation générale. Budget d'augmentations individuelles de 2,15 % des TTC, promotions incluses (1,85 % en cas de PV de désaccord), au 1er avril 2026. Maintien du Graduate Pay Program et de l'Unexplained Pay Gap. Primes de transport revalorisées : zone 1 à 9 €, zone 2 à 12 €, zone 3 à 60 €.",
                 "cgtPosition": "Signataire (confirmation par courriel).",
                 "tract": "-",
-                "documentTarget": "../../../HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-247229"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-247229"
             },
             {
                 "year": "2026",
@@ -394,7 +383,7 @@
                 "content": "Avenant n°1 à la RCC du 19/12/2025, suite aux observations de l'inspection du travail (réunion du 14/01/2026) : modifie uniquement l'article 2.5 « Réponse apportée au salarié » (partie VI – départs volontaires).",
                 "cgtPosition": "Non signataire de l'accord et de l'avenant.",
                 "tract": "-",
-                "documentTarget": "../../../HRLibrary/_layouts/15/viewer.aspx?sourcedoc=%7b78e118ec-38ae-4539-8422-29417de73e69%7d"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/_layouts/15/viewer.aspx?sourcedoc=%7b78e118ec-38ae-4539-8422-29417de73e69%7d"
             },
             {
                 "year": "2026",
@@ -412,8 +401,8 @@
                 "content": "Accord majoritaire CFDT + CFE-CGC du 19/12/2025 : 421 départs volontaires maximum. Éligibilité selon les organisations au 19/11/2025 ; candidatures jusqu'au 28/02/2026 ; départs d'avril à fin juin 2026. Congé de mobilité, congé de fin de carrière (CFC) ; cabinets Adventia (Paris-Saclay) et Catalys (Lannion).",
                 "cgtPosition": "Refus : suppressions massives, RCC répétitives, pas de garantie d'emploi ni d'embauche, pressions au volontariat.",
                 "tract": "Pour ceux qui restent (19/12/2025)",
-                "documentTarget": "../../../HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202025/Accord%20collectif%20portant%20sur%20une%20Rupture%20Conventionnelle%20Collective%20(RCC)%20au%20sein%20de%20Nokia%20Networks%20France%20(compress%c3%a9).pdf?web=1",
-                "tractTarget": "2025/tract_pour_ceux_qui_restent.pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202025/Accord%20collectif%20portant%20sur%20une%20Rupture%20Conventionnelle%20Collective%20(RCC)%20au%20sein%20de%20Nokia%20Networks%20France%20(compress%c3%a9).pdf?web=1",
+                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract_pour_ceux_qui_restent.pdf"
             },
             {
                 "year": "2025",
@@ -431,7 +420,7 @@
                 "content": "PERCOL propre à NNF, conclu après la dénonciation (25/02/2025) de l'accord CGF du 15/03/2024 (sortie d'ASN au 01/01/2025, fermeture de RFS au 30/06/2025 ; NNF seule entité depuis le 01/07/2025). Gestion libre / pilotée, abondement, transfert collectif des avoirs (annexes : instruments de placement, PV de transfert).",
                 "cgtPosition": "Défavorable : retraite par capitalisation, perte de cotisations sociales. Vote non retrouvé.",
                 "tract": "-",
-                "documentTarget": "../../../HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'entreprise%20relatif%20au%20Plan%20d'Epargne%20Retraite%20d'Entreprise%20Collectif%20PERCOL%20(16%20d%c3%a9cembre%202025).pdf?web=1"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'entreprise%20relatif%20au%20Plan%20d'Epargne%20Retraite%20d'Entreprise%20Collectif%20PERCOL%20(16%20d%c3%a9cembre%202025).pdf?web=1"
             },
             {
                 "year": "2025",
@@ -467,7 +456,7 @@
                 "content": "PEE propre à NNF (transformation du PEG après la dénonciation de l'accord CGF) ; sélection des fonds (fonds ISR) ; abondement concentré sur l'actionnariat Nokia.",
                 "cgtPosition": "Défavorable : épargne individualisée, rémunération « TTC », préférence pour un 13e mois cotisé. Vote non retrouvé.",
                 "tract": "-",
-                "documentTarget": "../../../HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'entreprise%20relatif%20au%20Plan%20d'Epargne%20Entreprise%20au%20sein%20de%20Nokia%20Networks%20France%20(16%20d%c3%a9cembre%202025).pdf?web=1"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'entreprise%20relatif%20au%20Plan%20d'Epargne%20Entreprise%20au%20sein%20de%20Nokia%20Networks%20France%20(16%20d%c3%a9cembre%202025).pdf?web=1"
             },
             {
                 "year": "2025",
@@ -485,7 +474,7 @@
                 "content": "Refonte du CET (réunions des 5 et 11 juin 2025) : ouverture après 6 mois de présence ; jour supplémentaire NPS/Lannion placé au CET ; liquidation monétaire partielle 1 fois par an (campagne de juin), 10 jours maximum ; 5e semaine de congés non monétisable.",
                 "cgtPosition": "À vérifier : critique d'une négociation rapide, dernier round supprimé, pas de texte final avant le vote, risque de monétisation des congés.",
                 "tract": "-",
-                "documentTarget": "../../../HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20CET%20(24%20juillet%202025).pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20CET%20(24%20juillet%202025).pdf"
             },
             {
                 "year": "2025",
@@ -503,8 +492,8 @@
                 "content": "Pas d'accord majoritaire : PV de désaccord de la négociation GEPP, signé par la DRH et les DSC CFDT, CFE-CGC et CGT.",
                 "cgtPosition": "Contestation : pas d'engagement d'embauche ni de remplacement des départs, garanties insuffisantes sur les activités en France.",
                 "tract": "Happy Thanksgiving chez Nokia : l'industrie française dindon de la farce (28/11/2025)",
-                "documentTarget": "",
-                "tractTarget": "2025/tract_rcc_2026.pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/wall-of-negos/GEPP%20-%20PV%20de%20de%CC%81saccord%202025%20VF-REVUE%20SUITE%20REMARQUES.pdf?web=1",
+                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract_rcc_2026.pdf"
             },
             {
                 "year": "2025",
@@ -522,8 +511,8 @@
                 "content": "Enveloppe d'environ 2 % (0,68 % après inflation). Signature CFDT isolée, non majoritaire.",
                 "cgtPosition": "Refus : perte d'environ 4 % de pouvoir d'achat depuis 2021, trop d'individuel, pas de mesure générale. Blocage des calendriers (~600 salariés).",
                 "tract": "Salaires +0,68 % : les négos ça ne marche pas, il faut se mobiliser (26/03/2025)",
-                "documentTarget": "",
-                "tractTarget": "2025/tract-salaires-2025.pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/wall-of-negos/Proc%C3%A8s%20verbal%20NAO%20(d%C3%A9saccord)%202025%20(27%20mars%202025).pdf?web=1",
+                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract-salaires-2025.pdf"
             },
             {
                 "year": "2025",
@@ -541,8 +530,8 @@
                 "content": "Avenant à l'accord télétravail d'avril 2022 : réécriture de l'article 4.1 – aide à l'équipement de 300 € remboursée sur note de frais (magasin au choix, en une fois, dans les 6 mois) ; indemnité de télétravail portée de 4 € à 4,40 €, sans indexation automatique (revalorisation possible en NAO).",
                 "cgtPosition": "Non signataire : rapport de force jugé suffisant pour obtenir plus, refus de l'absence d'indexation, aide non renouvelable.",
                 "tract": "Avenant Télétravail : signer pour 40 centimes ? Chronique d'une occasion manquée (19/02/2025)",
-                "documentTarget": "../../../HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-245115",
-                "tractTarget": "2025/tract-avenant-TL-v2.pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-245115",
+                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract-avenant-TL-v2.pdf"
             },
             {
                 "year": "2024",
@@ -560,7 +549,7 @@
                 "content": "Calendrier, contenu final et signataires à retrouver.",
                 "cgtPosition": "Non signataire.",
                 "tract": "-",
-                "documentTarget": ""
+                "documentTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/wall-of-negos/PV%20d%C3%A9saccord%20Partage%20de%20la%20valeur%20VS.pdf?web=1"
             },
             {
                 "year": "2024",
@@ -578,8 +567,8 @@
                 "content": "Accord-cadre NPS de mise en conformité des accords existants avec la nouvelle convention collective de la métallurgie : « cadres » → groupes F à I, « non-cadres / mensuels » → groupes A à E. Durée indéterminée.",
                 "cgtPosition": "Non signataire : désaccords sur la classification et la cotation.",
                 "tract": "Et toi alors, t'es coté combien ? (31/10/2023)",
-                "documentTarget": "../../../HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20cadre%20NPS%20nouvelle%20convention%20collective-%202024%20sign%C3%A9.pdf",
-                "tractTarget": "2023/ncc%20cotation%203.pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20cadre%20NPS%20nouvelle%20convention%20collective-%202024%20sign%C3%A9.pdf",
+                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/ncc%20cotation%203.pdf"
             },
             {
                 "year": "2024",
@@ -597,7 +586,7 @@
                 "content": "Exercices 2025, 2026 et 2027. Enveloppe maximale = 4 % de la masse salariale × [CA vs objectif plan France (50 %) + brevets et publications (25 %) + ratio mobilité durable (25 %)]. Répartition : 50 % selon la durée de présence, 50 % selon le salaire.",
                 "cgtPosition": "Signataire.",
                 "tract": "-",
-                "documentTarget": "../../../HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d%27int%C3%A9ressement%202025-2028.pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d%27int%C3%A9ressement%202025-2028.pdf"
             },
             {
                 "year": "2024",
@@ -633,7 +622,7 @@
                 "content": "Contenu, dates et versions à retrouver.",
                 "cgtPosition": "Signataire (confirmé par le bilan annuel).",
                 "tract": "-",
-                "documentTarget": "../../../HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20am%C3%A9nagement%20temps%20travail%20NPS%202024.pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20am%C3%A9nagement%20temps%20travail%20NPS%202024.pdf"
             },
             {
                 "year": "2024",
@@ -651,8 +640,8 @@
                 "content": "Nouvelle réduction d'effectifs : 231 suppressions de postes en 2024.",
                 "cgtPosition": "Signataire, puis bilan critique : délocalisations, perte de savoir-faire, charge de travail, RPS, externalisations.",
                 "tract": "Bilan de la RCC 2024 : Nokia a (encore) montré son vrai visage (05/11/2024)",
-                "documentTarget": "../../../HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-242162",
-                "tractTarget": "2024/tract_bilan_rcc24_v4.pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-242162",
+                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2024/tract_bilan_rcc24_v4.pdf"
             },
             {
                 "year": "2024",
@@ -670,7 +659,7 @@
                 "content": "Comité Groupe France (NNF, ASN, RFS). Dénoncé en 2025 (sortie d'ASN, fermeture de RFS).",
                 "cgtPosition": "Signataire, pour maintenir une instance d'examen des résultats des sociétés françaises du groupe.",
                 "tract": "-",
-                "documentTarget": "../../../HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-242235"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-242235"
             },
             {
                 "year": "2024",
@@ -688,7 +677,7 @@
                 "content": "Accord signé le 14/11/2024 (dispositif existant depuis octobre 2017) : don de jours élargi aux aidants d'un enfant, d'un partenaire de vie ou d'un parent ; évaluation par le service social ; plafonds de 20 ou 10 jours ; commission paritaire pour les cas hors cadre. Compteur > 900 jours.",
                 "cgtPosition": "Signataire : soutien à l'élargissement, demande d'un seuil préservant les congés des aidants.",
                 "tract": "-",
-                "documentTarget": "../../../HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20don%20de%20jours%2014%20novembre%202024.pdf?web=1"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20don%20de%20jours%2014%20novembre%202024.pdf?web=1"
             },
             {
                 "year": "2023",
@@ -706,7 +695,7 @@
                 "content": "Projet d'accord d'harmonisation des bonus (TI) — document de travail retrouvé.",
                 "cgtPosition": "À vérifier",
                 "tract": "-",
-                "documentTarget": ""
+                "documentTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/wall-of-negos/Draft%20accord%20harmonisation%20TI%202023.pdf?web=1"
             },
             {
                 "year": "2023",
@@ -724,7 +713,7 @@
                 "content": "Accord de substitution pour les non-cadres (groupes d'emploi A à E) lié à la nouvelle convention collective de la métallurgie. Signé par toutes les organisations syndicales représentatives.",
                 "cgtPosition": "À vérifier : correction demandée (« salaire fixe » au lieu de « salaire de base »).",
                 "tract": "-",
-                "documentTarget": "../../../HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-241444"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-241444"
             },
             {
                 "year": "2023",
@@ -742,8 +731,8 @@
                 "content": "Accord signé par la CFDT et la CGT, validé par la DRIEETS le 01/08/2023 : jusqu'à 173 départs volontaires ; 1re période de volontariat jusqu'au 15/10/2023, 2e du 17/10 au 14/11/2023 ; congé de mobilité ; parcours retraite ; aides formation/création/mobilité ; cabinet Adventia ; commission de suivi ; pas de licenciement économique contraint.",
                 "cgtPosition": "Signataire (logique pragmatique), avec alertes : pressions au volontariat, décimation des équipes, absence de garanties sur les activités en France, lien RCC / absence d'augmentation.",
                 "tract": "Rentrée 2023 – Volontariat RCC : des motifs de vigilance (18/09/2023)",
-                "documentTarget": "../../../HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-240670",
-                "tractTarget": "2023/Tract%20Volontariat%20RCC.pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-240670",
+                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20Volontariat%20RCC.pdf"
             },
             {
                 "year": "2023",
@@ -761,8 +750,8 @@
                 "content": "Pas d'accord signé. Enveloppe appliquée unilatéralement : 3,21 % cadres, 5 % non-cadres. Contestation des nombreux 0 % d'augmentation.",
                 "cgtPosition": "Refus : mesures insuffisantes et trop individualisées. Demande intersyndicale des statistiques réelles d'application.",
                 "tract": "Brèves de printemps (21/04/2023)",
-                "documentTarget": "",
-                "tractTarget": "2023/Tract%20brèves%20de%20printemps.pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/wall-of-negos/NAO%202023%20-%20PV%20d%C3%A9saccord.pdf?web=1",
+                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20brèves%20de%20printemps.pdf"
             },
             {
                 "year": "2023",
@@ -780,8 +769,8 @@
                 "content": "Accord majoritaire CFDT + CFE-CGC du 12/04/2023, pour 4 ans : référent égalité, « Groupe Égalité », objectif d'embauches de femmes aligné sur le groupe, 80 % des managers formés, revue de l'ASR, indicateurs de suivi (référence 2023).",
                 "cgtPosition": "Non signataire (détail du vote interne non retrouvé).",
                 "tract": "Brèves de printemps (21/04/2023)",
-                "documentTarget": "",
-                "tractTarget": "2023/Tract%20brèves%20de%20printemps.pdf"
+                "documentTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/wall-of-negos/Accord%20%C3%A9galit%C3%A9%20professionnelle.pdf?web=1",
+                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20brèves%20de%20printemps.pdf"
             },
             {
                 "year": "2023",
@@ -799,7 +788,7 @@
                 "content": "Mise à jour de la protection sociale santé (nouvelle convention collective, 01/01/2023) : canton La Boétie (49 entreprises) géré par Malakoff Humanis et piloté par une commission paritaire (CPT). Remplace l'accord de 1989 et ses avenants.",
                 "cgtPosition": "Signataire (accord signé par toutes les OS représentatives).",
                 "tract": "-",
-                "documentTarget": "../../../HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-237880"
+                "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-237880"
             }
         ];
 
@@ -885,7 +874,7 @@
                     const documentUrl = getAgreementUrl(agreement);
                     const tractUrl = getTractUrl(agreement);
                     const documentMetaLink = documentUrl
-                        ? `<a class="agreement-link agreement-meta-link" href="${escapeHtml(documentUrl)}" target="_blank" rel="noopener noreferrer">Ouvrir dans SharePoint ↗</a>`
+                        ? `<a class="agreement-link agreement-meta-link" href="${escapeHtml(documentUrl)}" target="_blank" rel="noopener noreferrer">Ouvrir sur le SharePoint</a>`
                         : '';
                     const tractLink = tractUrl && agreement.tract && agreement.tract !== '-'
                         ? `<a class="agreement-link agreement-tract-link" href="${escapeHtml(tractUrl)}" target="_blank" rel="noopener noreferrer" title="Ouvrir le tract : ${escapeHtml(agreement.tract)}">${escapeHtml(agreement.tract)} ↗</a>`
@@ -904,7 +893,7 @@
                                         ${documentMetaLink}
                                     </span>
                                     <span class="agreement-content">${escapeHtml(agreement.content || '—')}</span>
-                                    ${tractLink ? `<div class="agreement-tract-line">${tractLink}</div>` : ''}
+                                    ${tractLink ? `<div class="agreement-tract-line agreement-content">Relire notre tract : ${tractLink}</div>` : ''}
                                 </div>
                             </div>
                             <div class="agreement-status">${organizationStatuses}</div>
