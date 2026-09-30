@@ -138,6 +138,18 @@
             font-size: 0.78em;
         }
 
+        .agreement-meta-line {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .agreement-meta-link {
+            font-size: 0.78em;
+            white-space: nowrap;
+        }
+
         .agreement-status {
             align-items: center;
             color: var(--text-muted);
@@ -175,30 +187,6 @@
             color: #e6b94f;
             font-size: 0.72em;
             font-weight: 600;
-        }
-
-        .agreement-pill {
-            align-items: center;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            box-sizing: border-box;
-            display: inline-flex;
-            font-size: 0.76em;
-            font-weight: 600;
-            gap: 5px;
-            height: 28px;
-            line-height: 1;
-            max-width: 100%;
-            overflow: hidden;
-            padding: 0 8px;
-            text-overflow: ellipsis;
-            text-decoration: none;
-            white-space: nowrap;
-        }
-
-        .agreement-pill-pdf {
-            border-color: #ff737d;
-            color: #ff9299;
         }
 
         .agreement-os-status {
@@ -896,8 +884,8 @@
                     }).join('');
                     const documentUrl = getAgreementUrl(agreement);
                     const tractUrl = getTractUrl(agreement);
-                    const pdfPill = documentUrl
-                        ? `<a class="agreement-pill agreement-pill-pdf" href="${escapeHtml(documentUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le PDF de l'accord">PDF ↗</a>`
+                    const documentMetaLink = documentUrl
+                        ? `<a class="agreement-link agreement-meta-link" href="${escapeHtml(documentUrl)}" target="_blank" rel="noopener noreferrer">Ouvrir dans SharePoint ↗</a>`
                         : '';
                     const tractLink = tractUrl && agreement.tract && agreement.tract !== '-'
                         ? `<a class="agreement-link agreement-tract-link" href="${escapeHtml(tractUrl)}" target="_blank" rel="noopener noreferrer" title="Ouvrir le tract : ${escapeHtml(agreement.tract)}">${escapeHtml(agreement.tract)} ↗</a>`
@@ -908,11 +896,13 @@
                             <div class="agreement-main">
                                 <div class="agreement-heading">
                                     <div class="agreement-title-line">
-                                        ${pdfPill}
                                         <span class="agreement-title">${escapeHtml(agreement.title)}</span>
                                         <span class="agreement-validity ${validityClass}" title="${escapeHtml(validityTitle)}" aria-label="${escapeHtml(validityLabel)}">${validityText}</span>
                                     </div>
-                                    <span class="agreement-meta">${agreement.year} · ${escapeHtml(agreement.site)}</span>
+                                    <span class="agreement-meta-line">
+                                        <span class="agreement-meta">${agreement.year} · ${escapeHtml(agreement.site)}</span>
+                                        ${documentMetaLink}
+                                    </span>
                                     <span class="agreement-content">${escapeHtml(agreement.content || '—')}</span>
                                     ${tractLink ? `<div class="agreement-tract-line">${tractLink}</div>` : ''}
                                 </div>
