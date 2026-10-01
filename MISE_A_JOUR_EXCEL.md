@@ -6,6 +6,8 @@ Lors d'une prochaine mise a jour depuis `accords.xlsx`, reporter les nouvelles l
 
 Les URLs doivent etre completes directement dans les donnees. Ne pas utiliser de chemin relatif comme `../../../HRLibrary/...` ou `2025/tract.pdf`.
 
+La colonne D d'Excel s'appelle `URL` (anciennement `Lien`) et contient deja l'URL brute absolue du document (texte, pas d'hyperlien). La reporter telle quelle dans `documentTarget` : normalement aucune correction n'est necessaire. Cellule vide = document introuvable.
+
 - Accord CGT39 : renseigner `documentTarget` avec l'URL complete du document dans le dossier des accords negocies.
 - Accord HRLibrary : renseigner `documentTarget` avec une URL commencant par `https://nokia.sharepoint.com/sites/HRLibrary/`. Ne pas ajouter `CGT39`.
 - Accord BDESE : renseigner `documentTarget` avec une URL commencant par `https://nokia.sharepoint.com/sites/BDESENNF-Centrale/`.
@@ -26,8 +28,8 @@ Le dossier `salariés` apparait une seule fois dans le chemin des tracts.
 Pour chaque ligne Excel :
 
 - `year`, `site`, `title`
-- `link` : `CGT39`, `HRLibrary` ou `BDESE`
-- `documentTarget` : URL absolue, ou chaine vide si le document est introuvable
+- `link` : `CGT39`, `HRLibrary` ou `BDESE` (a deduire du domaine de l'URL : `/sites/CGT39/`, `/sites/HRLibrary/`, `/sites/BDESENNF-Centrale/`)
+- `documentTarget` : valeur de la colonne Excel `URL`, ou chaine vide si la cellule est vide
 - `tractTarget` : URL absolue, ou chaine vide si aucun tract
 - `validity`, `cgt`, `cfdt`, `cfeCgc`
 - `content`, `cgtPosition`, `signatureSource`
