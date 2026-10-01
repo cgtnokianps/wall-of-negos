@@ -8,6 +8,8 @@ Les URLs doivent etre completes directement dans les donnees. Ne pas utiliser de
 
 La colonne D d'Excel s'appelle `URL` (anciennement `Lien`) et contient deja l'URL brute absolue du document (texte, pas d'hyperlien). La reporter telle quelle dans `documentTarget` : normalement aucune correction n'est necessaire. Cellule vide = document introuvable.
 
+Si la cellule contient plusieurs URLs separees par `, ` (ex. accord + avenant), `documentTarget` devient un tableau de chaines ; chaque document est alors affiche avec son nom de fichier.
+
 - Accord CGT39 : renseigner `documentTarget` avec l'URL complete du document dans le dossier des accords negocies.
 - Accord HRLibrary : renseigner `documentTarget` avec une URL commencant par `https://nokia.sharepoint.com/sites/HRLibrary/`. Ne pas ajouter `CGT39`.
 - Accord BDESE : renseigner `documentTarget` avec une URL commencant par `https://nokia.sharepoint.com/sites/BDESENNF-Centrale/`.
