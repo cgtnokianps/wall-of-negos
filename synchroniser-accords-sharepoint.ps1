@@ -49,6 +49,7 @@ $Files = @(
 "Accord cadre NPS nouvelle convention collective- 2024 signé.pdf",
 "Avenant Procès-verbal de désaccord NAO 2024 (9 avril 2024).pdf",
 "Accord de substitution non cadres - 30 novembre 2023.pdf",
+"Accord harmonisation taux variable cible salariés non sales du 19 décembre 2023.pdf",
 "Accord RCC 2023.pdf",
 "Accord égalité professionnelle.pdf",
 "Accord remboursement santé - 2023.pdf"

@@ -1,19 +1,39 @@
 # Mise a jour depuis Excel
 
-## Principe
+## Principe et colonnes
 
-Lors d'une prochaine mise a jour depuis `accords.xlsx`, reporter les nouvelles lignes dans `agreementRows` de `index.html`.
+Lors d'une mise a jour depuis la feuille `accords` de `accords.xlsx`, synchroniser les donnees avec `agreementRows` de `index.html` en appariant les lignes par annee, site et titre.
 
-Les URLs doivent etre completes directement dans les donnees. Ne pas utiliser de chemin relatif comme `../../../HRLibrary/...` ou `2025/tract.pdf`.
+- A `année`, B `site`, C `Accord ou négociation` : titre court, objet seul ; ajouter l'annee quand un objet se repete (NAO, RCC, amenagement du temps de travail).
+- D `URL` : URL brute absolue du document. La reporter telle quelle dans `documentTarget`. Cellule vide = document introuvable. Plusieurs URLs separees par `, ` deviennent un tableau.
+- E `file name` : reprendre le nom de fichier exact de l'URL en D. Ne jamais reconstruire D a partir de E.
+- F `Validité` : formule basee sur G-I. Deux signatures confirmees ou plus = `TRUE`; si deux signatures restent possibles mais non verifiees = `À vérifier`; sinon = `FALSE`. Exception : un PV de désaccord est valide comme procès-verbal, avec G-I a `-` et la source `PV de désaccord valide unilatéralement ; aucun accord collectif n’a été signé.`
+- G-I `CGT`, `CFDT`, `CFE-CGC` : statuts confirmes par la page de signature ; `-` pour un PV de désaccord (rien à signer).
+- J `page signature` : URL SharePoint brute vers la capture JPG sous `https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/`.
+- K `Source signatures` : preferer `p.X : signatures de...` en nommant les organisations visibles et toute absence. Si la capture est une version non signee, l'indiquer au lieu de la presenter comme preuve.
+- L `date VF` : date finale lue dans le PDF (page de signature, date de validation ou page de garde) ; reporter dans `finalVersionDate`.
+- M `Contenu`, N `Position CGT`, O `tract` : champs descriptifs et tract. Le lien du tract reste absolu.
 
-La colonne D d'Excel s'appelle `URL` (anciennement `Lien`) et contient deja l'URL brute absolue du document (texte, pas d'hyperlien). La reporter telle quelle dans `documentTarget` : normalement aucune correction n'est necessaire. Cellule vide = document introuvable.
+## Classement local des PDF
 
-Si la cellule contient plusieurs URLs separees par `, ` (ex. accord + avenant), `documentTarget` devient un tableau de chaines ; chaque document est alors affiche avec son nom de fichier.
+- `copies/` contient uniquement les copies locales CGT39.
+- Les documents HRLibrary et BDESE sont places dans `copies/rh/`.
+- La source RH synchronisee localement est `C:\Users\yelmghaz\Nokia\People library - France`.
+- Le PDF BDESE Handicap provient de `C:\Users\yelmghaz\Nokia\CGT - NPS - Documents\NNF France\negos centrales\accord handicap 2025\ACCORD HANDICAP VERSION REVUE LE 8 juin 2026.pdf` et est copie sous le nom de fichier de la colonne E.
+- Le script ignore un PDF RH deja present dans `copies/rh/` et ne deplace ni ne remplace les copies CGT39 de `copies/`.
 
-- Accord CGT39 : renseigner `documentTarget` avec l'URL complete du document dans le dossier des accords negocies.
-- Accord HRLibrary : renseigner `documentTarget` avec une URL commencant par `https://nokia.sharepoint.com/sites/HRLibrary/`. Ne pas ajouter `CGT39`.
-- Accord BDESE : renseigner `documentTarget` avec une URL commencant par `https://nokia.sharepoint.com/sites/BDESENNF-Centrale/`.
-- Tract : renseigner `tractTarget` avec une URL commencant par `https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/`.
+## Captures de signatures
+
+Une capture JPG par PDF se trouve dans `captures_signatures/`. Les captures `cgt_` proviennent des PDF de `copies/`; les captures `rh_` proviennent de `copies/rh/`. Fusionner les pages cote a cote lorsque les signatures sont reparties sur plusieurs pages.
+
+Dans l'index, stocker le chemin relatif de la capture dans `signatureTarget`, par exemple `captures_signatures/rh_nom_p10_signature.jpg`. En Excel, J contient l'URL SharePoint absolue construite avec le prefixe CGT39 ci-dessus. Si aucune page de signature ou aucun document n'existe, laisser J et `signatureTarget` vides.
+
+Le champ `link` n'est pas utilise dans l'index et ne doit pas etre ajoute. `firstRoundDate` n'est pas conserve dans `agreementRows`.
+
+- Accord HRLibrary : URL commencant par `https://nokia.sharepoint.com/sites/HRLibrary/`.
+- Accord BDESE : URL commencant par `https://nokia.sharepoint.com/sites/BDESENNF-Centrale/`.
+- Documents CGT39 : URL sous `/sites/CGT39/`.
+- Tracts : URL commencant par `https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/`.
 
 Le dossier `salariés` apparait une seule fois dans le chemin des tracts.
 
@@ -24,19 +44,6 @@ Le dossier `salariés` apparait une seule fois dans le chemin des tracts.
 - `è` : `%C3%A8`
 - `à` : `%C3%A0`
 - Conserver les paramètres SharePoint existants (`?web=1`, `DocIdRedir.aspx`, etc.).
-
-## Champs a verifier
-
-Pour chaque ligne Excel :
-
-- `year`, `site`, `title`
-- `link` : `CGT39`, `HRLibrary` ou `BDESE` (a deduire du domaine de l'URL : `/sites/CGT39/`, `/sites/HRLibrary/`, `/sites/BDESENNF-Centrale/`)
-- `documentTarget` : valeur de la colonne Excel `URL`, ou chaine vide si la cellule est vide
-- `tractTarget` : URL absolue, ou chaine vide si aucun tract
-- `validity`, `cgt`, `cfdt`, `cfeCgc`
-- `content`, `cgtPosition`, `signatureSource`
-
-`fileName` peut rester comme information descriptive, mais il ne doit plus servir a reconstruire le lien.
 
 ## Controles avant commit
 
@@ -53,7 +60,7 @@ rg '"(documentTarget|tractTarget)": "\.\./|"tractTarget": "20[0-9][0-9]/' index.
 - Les tracts doivent utiliser `/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/`.
 - Les tracts ne doivent jamais contenir `salari%C3%A9s/salari%C3%A9s`.
 
-3. Executer le test de rendu Node utilise dans le projet et verifier le nombre total d'accords, de liens de documents et de liens de tracts.
+3. Verifier que les titres, filenames, statuts, `signatureSource`, URLs D et captures J concordent. Les captures `signatureTarget` doivent exister dans `captures_signatures/`.
 
 4. Executer le diagnostic VS Code sur `index.html`.
 
