@@ -154,6 +154,18 @@
             white-space: nowrap;
         }
 
+        .agreement-document-list {
+            display: grid;
+            gap: 4px;
+            margin: 0;
+            min-width: 0;
+            padding-left: 18px;
+        }
+
+        .agreement-document-list li {
+            overflow-wrap: anywhere;
+        }
+
         .agreement-status {
             align-items: center;
             color: var(--text-muted);
@@ -278,8 +290,8 @@
             return decodeURIComponent(path.slice(path.lastIndexOf('/') + 1)).replace(/\.pdf$/i, '');
         }
 
-        function getTractUrl(agreement) {
-            return agreement.tractTarget || '';
+        function getTracts(agreement) {
+            return Array.isArray(agreement.tract) ? agreement.tract : [];
         }
 
         const agreementRows = [
@@ -334,9 +346,8 @@
                 "finalVersionDate": "16/07/2026",
                 "content": "195 suppressions de postes ; volontariat à l'automne 2026 ; fin de carrière jusqu'à 250 000 €.",
                 "cgtPosition": "Refus de principe : « RCC 2026, c'est toujours non ».",
-                "tract": "N-ième RCC, 2ème de 2026 : retour sondage salariés (26/06/2026)",
+                "tract": [{ "title": "N-ième RCC, 2ème de 2026 : retour sondage salariés (26/06/2026)", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2026/2026_06_TRACT-RetourSondageRCC2026-2.pdf" }],
                 "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/Forms/AllItems.aspx?id=/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202026/Accord_RCC_2026.pdf&parent=/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202026",
-                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2026/2026_06_TRACT-RetourSondageRCC2026-2.pdf"
             },
             {
                 "year": "2026",
@@ -407,9 +418,8 @@
                 "finalVersionDate": "19/12/2025",
                 "content": "Accord majoritaire CFDT + CFE-CGC du 19/12/2025 : 421 départs volontaires maximum. Éligibilité selon les organisations au 19/11/2025 ; candidatures jusqu'au 28/02/2026 ; départs d'avril à fin juin 2026. Congé de mobilité, congé de fin de carrière (CFC) ; cabinets Adventia (Paris-Saclay) et Catalys (Lannion).",
                 "cgtPosition": "Refus : suppressions massives, RCC répétitives, pas de garantie d'emploi ni d'embauche, pressions au volontariat.",
-                "tract": "Pour ceux qui restent (19/12/2025)",
+                "tract": [{ "title": "Pour ceux qui restent (19/12/2025)", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract_pour_ceux_qui_restent.pdf" }],
                 "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202025/Accord%20collectif%20portant%20sur%20une%20Rupture%20Conventionnelle%20Collective%20(RCC)%20au%20sein%20de%20Nokia%20Networks%20France%20(compress%c3%a9).pdf?web=1",
-                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract_pour_ceux_qui_restent.pdf"
             },
             {
                 "year": "2025",
@@ -498,9 +508,8 @@
                 "finalVersionDate": "30/09/2025",
                 "content": "Pas d'accord majoritaire : PV de désaccord de la négociation GEPP, signé par la DRH et les DSC CFDT, CFE-CGC et CGT.",
                 "cgtPosition": "Contestation : pas d'engagement d'embauche ni de remplacement des départs, garanties insuffisantes sur les activités en France.",
-                "tract": "Happy Thanksgiving chez Nokia : l'industrie française dindon de la farce (28/11/2025)",
-                "documentTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/wall-of-negos/GEPP%20-%20PV%20de%20de%CC%81saccord%202025%20VF-REVUE%20SUITE%20REMARQUES.pdf?web=1",
-                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract_rcc_2026.pdf"
+                "tract": [{ "title": "Happy Thanksgiving chez Nokia : l'industrie française dindon de la farce (28/11/2025)", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract_rcc_2026.pdf" }],
+                "documentTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/copies/GEPP%20-%20PV%20de%20de%CC%81saccord%202025%20VF.pdf?web=1",
             },
             {
                 "year": "2025",
@@ -517,9 +526,8 @@
                 "finalVersionDate": "27/03/2025",
                 "content": "Enveloppe d'environ 2 % (0,68 % après inflation). Signature CFDT isolée, non majoritaire.",
                 "cgtPosition": "Refus : perte d'environ 4 % de pouvoir d'achat depuis 2021, trop d'individuel, pas de mesure générale. Blocage des calendriers (~600 salariés).",
-                "tract": "Salaires +0,68 % : les négos ça ne marche pas, il faut se mobiliser (26/03/2025)",
+                "tract": [{ "title": "Salaires +0,68 % : les négos ça ne marche pas, il faut se mobiliser (26/03/2025)", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract-salaires-2025.pdf" }],
                 "documentTarget": "https://nokia.sharepoint.com/:b:/r/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Proc%C3%A8s%20verbal%20NAO%20(d%C3%A9saccord)%202025%20(27%20mars%202025).pdf?d=w9d7b62b129014c718603e94d2d39d5a1&csf=1&web=1&e=xeQooW",
-                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract-salaires-2025.pdf"
             },
             {
                 "year": "2025",
@@ -536,9 +544,8 @@
                 "finalVersionDate": "24/02/2025",
                 "content": "Avenant à l'accord télétravail d'avril 2022 : réécriture de l'article 4.1 – aide à l'équipement de 300 € remboursée sur note de frais (magasin au choix, en une fois, dans les 6 mois) ; indemnité de télétravail portée de 4 € à 4,40 €, sans indexation automatique (revalorisation possible en NAO).",
                 "cgtPosition": "Non signataire : rapport de force jugé suffisant pour obtenir plus, refus de l'absence d'indexation, aide non renouvelable.",
-                "tract": "Avenant Télétravail : signer pour 40 centimes ? Chronique d'une occasion manquée (19/02/2025)",
+                "tract": [{ "title": "Avenant Télétravail : signer pour 40 centimes ? Chronique d'une occasion manquée (19/02/2025)", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract-avenant-TL-v2.pdf" }],
                 "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-245115",
-                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract-avenant-TL-v2.pdf"
             },
             {
                 "year": "2024",
@@ -556,7 +563,7 @@
                 "content": "Calendrier, contenu final et signataires à retrouver.",
                 "cgtPosition": "Non signataire.",
                 "tract": "-",
-                "documentTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/wall-of-negos/PV%20d%C3%A9saccord%20Partage%20de%20la%20valeur%20VS.pdf?web=1"
+                "documentTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/copies/PV%20d%C3%A9saccord%20Partage%20de%20la%20valeur%20VS.pdf?web=1"
             },
             {
                 "year": "2024",
@@ -573,9 +580,8 @@
                 "finalVersionDate": "15/02/2024",
                 "content": "Accord-cadre NPS de mise en conformité des accords existants avec la nouvelle convention collective de la métallurgie : « cadres » → groupes F à I, « non-cadres / mensuels » → groupes A à E. Durée indéterminée.",
                 "cgtPosition": "Non signataire : désaccords sur la classification et la cotation.",
-                "tract": "Et toi alors, t'es coté combien ? (31/10/2023)",
+                "tract": [{ "title": "Et toi alors, t'es coté combien ? (31/10/2023)", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/ncc%20cotation%203.pdf" }],
                 "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20cadre%20NPS%20nouvelle%20convention%20collective-%202024%20sign%C3%A9.pdf",
-                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/ncc%20cotation%203.pdf"
             },
             {
                 "year": "2024",
@@ -646,9 +652,8 @@
                 "finalVersionDate": "19/04/2024",
                 "content": "Nouvelle réduction d'effectifs : 231 suppressions de postes en 2024.",
                 "cgtPosition": "Signataire, puis bilan critique : délocalisations, perte de savoir-faire, charge de travail, RPS, externalisations.",
-                "tract": "Bilan de la RCC 2024 : Nokia a (encore) montré son vrai visage (05/11/2024)",
+                "tract": [{ "title": "Bilan de la RCC 2024 : Nokia a (encore) montré son vrai visage (05/11/2024)", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2024/tract_bilan_rcc24_v4.pdf" }],
                 "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-242162",
-                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2024/tract_bilan_rcc24_v4.pdf"
             },
             {
                 "year": "2024",
@@ -701,7 +706,7 @@
                 "finalVersionDate": "15/02/2024",
                 "content": "Pas d'accord : PV de désaccord NAO 2024 (dernière réunion le 07-08/02/2024), puis avenant au PV négocié le 02/04/2024. Augmentation moyenne jugée « pitoyable » ; mobilisation intersyndicale CFDT / CFE-CGC / CGT en mars 2024.",
                 "cgtPosition": "À vérifier : mobilisation intersyndicale contre la faiblesse des augmentations.",
-                "tract": "NAO -> RCC -> REPEAT : l'urgence de la radicalité (15/03/2024)",
+                "tract": [{ "title": "NAO -> RCC -> REPEAT : l'urgence de la radicalité (15/03/2024)", "url": "" }],
                 "documentTarget": [
                     "https://nokia.sharepoint.com/:b:/r/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/PV%20D%C3%A9saccord%20NAO%202024%20(15%20f%C3%A9vrier%202024).pdf?d=waee681ffe1e04075ad0db67395d7487a&csf=1&web=1&e=B4eck9",
                     "https://nokia.sharepoint.com/:b:/r/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Avenant%20Proc%C3%A8s-verbal%20de%20d%C3%A9saccord%20NAO%202024%20(9%20avril%202024).pdf?d=w4846416ec812482ea8212ce083de99e2&csf=1&web=1&e=I3LJyw"
@@ -758,9 +763,8 @@
                 "finalVersionDate": "04/07/2023",
                 "content": "Accord signé par la CFDT et la CGT, validé par la DRIEETS le 01/08/2023 : jusqu'à 173 départs volontaires ; 1re période de volontariat jusqu'au 15/10/2023, 2e du 17/10 au 14/11/2023 ; congé de mobilité ; parcours retraite ; aides formation/création/mobilité ; cabinet Adventia ; commission de suivi ; pas de licenciement économique contraint.",
                 "cgtPosition": "Signataire (logique pragmatique), avec alertes : pressions au volontariat, décimation des équipes, absence de garanties sur les activités en France, lien RCC / absence d'augmentation.",
-                "tract": "Rentrée 2023 – Volontariat RCC : des motifs de vigilance (18/09/2023)",
+                "tract": [{ "title": "Rentrée 2023 – Volontariat RCC : des motifs de vigilance (18/09/2023)", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20Volontariat%20RCC.pdf" }],
                 "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-240670",
-                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20Volontariat%20RCC.pdf"
             },
             {
                 "year": "2023",
@@ -777,9 +781,8 @@
                 "finalVersionDate": "-",
                 "content": "Pas d'accord signé. Enveloppe appliquée unilatéralement : 3,21 % cadres, 5 % non-cadres. Contestation des nombreux 0 % d'augmentation.",
                 "cgtPosition": "Refus : mesures insuffisantes et trop individualisées. Demande intersyndicale des statistiques réelles d'application.",
-                "tract": "Brèves de printemps (21/04/2023)",
+                "tract": [{ "title": "Brèves de printemps (21/04/2023)", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20br%C3%A8ves%20de%20printemps.pdf" }],
                 "documentTarget": "https://nokia.sharepoint.com/:b:/r/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/NAO%202023%20-%20PV%20d%C3%A9saccord.pdf?d=w8c431def6f054edda1304f1db0b90a4b&csf=1&web=1&e=EJaEFz",
-                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20br%C3%A8ves%20de%20printemps.pdf"
             },
             {
                 "year": "2023",
@@ -814,9 +817,8 @@
                 "finalVersionDate": "12/04/2023",
                 "content": "Accord majoritaire CFDT + CFE-CGC du 12/04/2023, pour 4 ans : référent égalité, « Groupe Égalité », objectif d'embauches de femmes aligné sur le groupe, 80 % des managers formés, revue de l'ASR, indicateurs de suivi (référence 2023).",
                 "cgtPosition": "Non signataire (détail du vote interne non retrouvé).",
-                "tract": "Brèves de printemps (21/04/2023)",
-                "documentTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/wall-of-negos/Accord%20%C3%A9galit%C3%A9%20professionnelle.pdf?web=1",
-                "tractTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20br%C3%A8ves%20de%20printemps.pdf"
+                "tract": [{ "title": "Brèves de printemps (21/04/2023)", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20br%C3%A8ves%20de%20printemps.pdf" }],
+                "documentTarget": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/copies/Accord%20%C3%A9galit%C3%A9%20professionnelle.pdf?web=1",
             },
             {
                 "year": "2023",
@@ -837,6 +839,10 @@
                 "documentTarget": "https://nokia.sharepoint.com/sites/HRLibrary/_layouts/15/DocIdRedir.aspx?ID=BTI3POTITA3Q-1865654459-237880"
             }
         ];
+
+        agreementRows.forEach(agreement => {
+            agreement.documentTarget = getAgreementUrls(agreement);
+        });
 
         function escapeHtml(value) {
             return String(value).replace(/[&<>"']/g, character => ({
@@ -880,7 +886,15 @@
                         (filterType === 'year' && agreement.year === filterValue) ||
                         (filterType === 'theme' && filterValue === 'effectifs' && /RCC/i.test(agreement.title)) ||
                         (filterType === 'theme' && filterValue === 'salaires' && /NAO|intéressement/i.test(agreement.title));
-                    const matchesQuery = !query || Object.values(agreement).join(' ').toLocaleLowerCase('fr').includes(query);
+                    const tractSearchText = getTracts(agreement)
+                        .flatMap(tract => [tract.title, tract.url])
+                        .filter(Boolean)
+                        .join(' ');
+                    const searchableValues = Object.entries(agreement)
+                        .filter(([key]) => key !== 'tract' && key !== 'tractTarget')
+                        .flatMap(([, value]) => Array.isArray(value) ? value : [value]);
+                    const matchesQuery = !query || `${searchableValues.join(' ')} ${tractSearchText}`
+                        .toLocaleLowerCase('fr').includes(query);
                     return matchesFilter && matchesQuery;
                 });
 
@@ -918,14 +932,20 @@
                         `;
                     }).join('');
                     const documentUrls = getAgreementUrls(agreement);
-                    const tractUrl = getTractUrl(agreement);
-                    const documentMetaLink = documentUrls.map(url => {
+                    const documentMetaLinks = documentUrls.map(url => {
                         const label = documentUrls.length > 1 ? getDocumentName(url) : 'Ouvrir sur le SharePoint';
                         return `<a class="agreement-link agreement-meta-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+                    });
+                    const documentMetaLink = documentUrls.length > 1
+                        ? `<ul class="agreement-document-list">${documentMetaLinks.map(link => `<li>${link}</li>`).join('')}</ul>`
+                        : documentMetaLinks.join('');
+                    const tractLinks = getTracts(agreement).map(tract => {
+                        const title = escapeHtml(tract.title || 'Ouvrir le tract');
+                        const link = tract.url
+                            ? `<a class="agreement-link agreement-tract-link" href="${escapeHtml(tract.url)}" target="_blank" rel="noopener noreferrer" title="Ouvrir le tract : ${title}">${title} ↗</a>`
+                            : title;
+                        return `<div class="agreement-tract-line agreement-content">Relire notre tract : ${link}</div>`;
                     }).join('');
-                    const tractLink = tractUrl && agreement.tract && agreement.tract !== '-'
-                        ? `<a class="agreement-link agreement-tract-link" href="${escapeHtml(tractUrl)}" target="_blank" rel="noopener noreferrer" title="Ouvrir le tract : ${escapeHtml(agreement.tract)}">${escapeHtml(agreement.tract)} ↗</a>`
-                        : '';
 
                     return `
                         <div class="agreement-entry">
@@ -935,12 +955,12 @@
                                         <span class="agreement-title">${escapeHtml(agreement.title)}</span>
                                         <span class="agreement-validity ${validityClass}" title="${escapeHtml(validityTitle)}" aria-label="${escapeHtml(validityLabel)}">${validityText}</span>
                                     </div>
-                                    <span class="agreement-meta-line">
+                                    <div class="agreement-meta-line">
                                         <span class="agreement-meta">${agreement.year} · ${escapeHtml(agreement.site)}</span>
                                         ${documentMetaLink}
-                                    </span>
+                                    </div>
                                     <span class="agreement-content">${escapeHtml(agreement.content || '—')}</span>
-                                    ${tractLink ? `<div class="agreement-tract-line agreement-content">Relire notre tract : ${tractLink}</div>` : ''}
+                                    ${tractLinks}
                                 </div>
                             </div>
                             <div class="agreement-status">${organizationStatuses}</div>
