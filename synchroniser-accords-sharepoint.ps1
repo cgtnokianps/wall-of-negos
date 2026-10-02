@@ -88,7 +88,7 @@ foreach ($File in $Files) {
 
 # Copie locale du PDF handicap utilisé pour l'accord BDESE
 $BDESESourceFile = Join-Path $CgtDocumentsPath "NNF France\negos centrales\accord handicap 2025\ACCORD HANDICAP VERSION REVUE LE 8 juin 2026.pdf"
-$BDESEFileName = Split-Path -Path $BDESESourceFile -Leaf
+$BDESEFileName = "Accord handicap 2026.pdf"
 if ($ExistingCopyNames.ContainsKey($BDESEFileName)) {
     Write-Host "Déjà présent dans copies/, ignoré : $BDESEFileName"
 }
