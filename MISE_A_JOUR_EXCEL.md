@@ -10,12 +10,11 @@ Les colonnes sont reperees par leur **en-tete**, jamais par leur lettre (l'ordre
 |---|---|---|
 | `année`, `site` | `year`, `site` | |
 | `Accord ou négociation` | `title` | Titre court, objet seul ; ajouter l'annee quand un objet se repete (NAO, RCC, amenagement du temps de travail). |
-| `URL accord` | `documentTarget` | URL brute absolue, reportee telle quelle. Vide = document introuvable. Plusieurs URLs separees par `, ` = tableau. Pas de `%2F` dans le chemin. |
-| `file name accord` | `fileName` | Nom exact du fichier de l'URL. Ne jamais reconstruire l'URL a partir du nom. `-` = vide. |
+| `URL accord`, `file name accord`, `page signature` | `documents[]` | Meme forme que les tracts : `{ "title", "url", "signatureTarget" }`. `title` est le nom exact du fichier. Plusieurs URLs separees par `, ` donnent plusieurs objets, dans le meme ordre que les noms de fichier. Vide = `[]`. `signatureTarget` est omis s'il n'y a pas de capture. Pas de `%2F` dans le chemin. |
 | `date VF` | `finalVersionDate` | Date finale lue dans le PDF (signature, validation ou page de garde), au format `jj/mm/aaaa`. Vide = `-`. |
 | `Validité` | `validity` | Formule basee sur CGT/CFDT/CFE-CGC : 2 signatures confirmees ou plus = `TRUE` ; 2 signatures encore possibles mais non verifiees = `À vérifier` ; sinon `FALSE`. Un PV de désaccord est valide comme procès-verbal. |
-| `CGT`, `CFDT`, `CFE-CGC` | `cgt`, `cfdt`, `cfeCgc` | `TRUE` = ✅, `FALSE` = ❌, `À vérifier` ; `-` pour un PV de désaccord (rien à signer). |
-| `page signature` | `signatureTarget` | URL SharePoint de la capture sous `https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/` ; dans l'index, chemin relatif `captures_signatures/...`. Vide ou `-` = pas de capture. |
+| `CGT`, `CFDT`, `CFE-CGC` | `signatures` | Liste des organisations confirmees : `cgt`, `cfdt`, `cfe`. `cftc` n'a pas de colonne Excel : par defaut la CFTC est non signataire et absente du tableau. Seul `TRUE` entre dans la liste. `FALSE`, `À vérifier` et `-` restent dehors. Aucune signature confirmee = `[]`. |
+| — | `tags` | Derive du titre, du site et de l'annee. NAO ou interessement = `#salaires`. RCC = `#effectifs`. Amenagement du temps de travail = `#rtt`. Site = `#nnf`, `#nps` ou `#lan`. Annee = `#2023`, `#2024`, `#2025`, `#2026` (ou l'annee reelle de la ligne). |
 | `Source signatures` | `signatureSource` | Preferer `p.X : signatures de...` en nommant les organisations visibles et toute absence. Signaler une version non signee. PV de désaccord : `PV de désaccord valide unilatéralement ; aucun accord collectif n’a été signé.` |
 | `Summary` | `content` | Resume court affiche dans l'index. |
 | `Position CGT` | `cgtPosition` | |
@@ -35,7 +34,7 @@ Les colonnes sont reperees par leur **en-tete**, jamais par leur lettre (l'ordre
 
 Une capture JPG par PDF se trouve dans `captures_signatures/`. Les captures `cgt_` proviennent des PDF de `copies/`; les captures `rh_` proviennent de `copies/rh/`. Fusionner les pages cote a cote lorsque les signatures sont reparties sur plusieurs pages.
 
-Dans l'index, stocker le chemin relatif de la capture dans `signatureTarget`, par exemple `captures_signatures/rh_nom_p10_signature.jpg`. En Excel, `page signature` contient l'URL SharePoint absolue construite avec le prefixe CGT39 ci-dessus. Si aucune page de signature ou aucun document n'existe, laisser `page signature` et `signatureTarget` vides.
+Dans l'index, stocker le chemin relatif de la capture dans `documents[].signatureTarget`, par exemple `captures_signatures/rh_nom_p10_signature.jpg`. En Excel, `page signature` contient l'URL SharePoint absolue construite avec le prefixe CGT39 ci-dessus. Si aucune page de signature ou aucun document n'existe, laisser `page signature` vide et omettre `signatureTarget`.
 
 Verifier chaque capture visuellement : certains scans sont tournes (redresser l'image) et certains PDF locaux ne sont pas signes (ne pas produire de capture dans ce cas).
 
@@ -61,7 +60,7 @@ Le dossier `salariés` apparait une seule fois dans le chemin des tracts.
 1. Verifier qu'il n'existe plus de cible relative :
 
 ```bash
-grep -nE '"(documentTarget|url)": "(\.\./|20[0-9][0-9]/)' index.html
+grep -nE '"(url|signatureTarget)": "(\.\./|20[0-9][0-9]/)' index.html
 ```
 
 2. Verifier les chemins sensibles :
@@ -71,7 +70,7 @@ grep -nE '"(documentTarget|url)": "(\.\./|20[0-9][0-9]/)' index.html
 - Les tracts doivent utiliser `/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/`.
 - Les tracts ne doivent jamais contenir `salari%C3%A9s/salari%C3%A9s`.
 
-3. Verifier que les titres, noms de fichier, statuts, `signatureSource`, `URL accord` et `page signature` concordent entre Excel et l'index. Les captures `signatureTarget` doivent exister dans `captures_signatures/`.
+3. Verifier que les titres, noms de fichier, statuts, `signatureSource`, `URL accord` et `page signature` concordent entre Excel et l'index. Les captures `documents[].signatureTarget` doivent exister dans `captures_signatures/`.
 
 4. Executer le diagnostic VS Code sur `index.html`.
 
