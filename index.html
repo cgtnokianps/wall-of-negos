@@ -48,7 +48,7 @@
             grid-column: 1;
             height: auto;
             justify-self: start;
-            width: 92px;
+            width: 138px;
         }
 
         .header-title {
@@ -66,14 +66,44 @@
             color: var(--text-muted);
         }
 
-        .header-representativity {
-            font-size: 0.82em;
-            line-height: 1.5;
-            margin-top: 8px;
+        .header-chart {
+            color: var(--text-muted);
+            font-size: 0.936em;
+            grid-column: 3;
+            justify-self: end;
+            margin: 0;
+            max-width: 100%;
+            text-align: left;
+            width: max-content;
         }
 
-        .header-representativity strong {
+        .header-chart-pie {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            margin: 0 0 10px auto;
+            width: 120px;
+        }
+
+        .header-chart-title {
             color: var(--text);
+            font-weight: 600;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+
+        .header-chart-legend {
+            display: grid;
+            gap: 2px;
+            list-style: none;
+            white-space: normal;
+        }
+
+        .header-chart-legend span {
+            border-radius: 2px;
+            display: inline-block;
+            height: 10px;
+            margin-right: 5px;
+            width: 10px;
         }
 
         .agreement-toolbar {
@@ -157,6 +187,11 @@
             overflow-wrap: anywhere;
         }
 
+        .agreement-cgt-position strong {
+            color: #e63946;
+            font-weight: 600;
+        }
+
         .agreement-tract-line {
             margin-top: 4px;
         }
@@ -197,7 +232,7 @@
             font-size: 0.78em;
             gap: 6px 12px;
             grid-column: 2;
-            grid-template-columns: repeat(4, 92px);
+            grid-template-columns: repeat(4, 118px);
             justify-content: start;
         }
 
@@ -232,21 +267,24 @@
             align-items: center;
             box-sizing: border-box;
             display: inline-flex;
-            height: 28px;
+            gap: 4px;
             white-space: nowrap;
         }
 
-        .agreement-os-status strong {
-            color: var(--text);
-            font-weight: 600;
+        .agreement-mark {
+            font-size: 2em;
+            line-height: 1;
         }
 
-        .cgt-logo {
-            height: 30px;
-            object-fit: cover;
-            object-position: left center;
-            vertical-align: middle;
-            width: 30px;
+        .agreement-os-status[data-union="cgt"] { color: #e63946; }
+        .agreement-os-status[data-union="cfdt"] { color: #f4a261; }
+        .agreement-os-status[data-union="cfe"] { color: #4da3ff; }
+        .agreement-os-status[data-union="cftc"] { color: #9aa0aa; }
+
+        .agreement-os-status strong {
+            color: inherit;
+            font-size: 1.5em;
+            font-weight: 600;
         }
 
         .agreement-link {
@@ -270,11 +308,16 @@
 
             .header-logo {
                 grid-column: 1;
-                width: 72px;
+                width: 108px;
             }
 
             .header-title {
                 grid-column: 1;
+            }
+
+            .header-chart {
+                grid-column: 1;
+                justify-self: center;
             }
 
             .header h1 {
@@ -311,12 +354,8 @@
             <div class="header-title">
                 <h1>Accords et Négociations Nokia</h1>
                 <p>2023 - 2026</p>
-                <p class="header-representativity">
-                    Représentativité : <strong>NNF</strong> · entreprise,
-                    <strong>NPS</strong> · établissement Paris-Saclay,
-                    <strong>LAN</strong> · établissement Lannion
-                </p>
             </div>
+            <figure class="header-chart" id="representativity-chart" aria-live="polite"></figure>
         </div>
 
         <div id="content"></div>
@@ -350,12 +389,12 @@
                 "site": "NNF",
                 "title": "RCC 2026 n°2",
                 "tags": ["#effectifs", "#nnf", "#2026"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cfdt", "cfe"],
                 "signatureSource": "p.54 : signatures de la CFDT et de la CFE-CGC ; aucune signature de la CGT.",
                 "finalVersionDate": "16/07/2026",
                 "content": "195 suppressions de postes. Volontariat ouvert à tous les salariés du 01/09 au 30/09/2026.",
-                "cgtPosition": "Refus de principe : « RCC 2026, c'est toujours non ».",
+                "cgtPosition": "RCC devenue un outil récurrent (2e de 2026) ; suppressions de postes sans embauche ni garantie d'emploi (la CGT demandait une garantie jusqu'au 31/12/2027) ; volontariat élargi à tous les salariés, d'où une pression sur les non-volontaires ; OS exclues de la commission de validation ; ni stratégie industrielle ni pérennité des sites traitées.",
                 "tract": [
                     { "title": "N-ième RCC, 2ème de 2026 – Retour sondage salariés", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2026/2026_06_TRACT-RetourSondageRCC2026-2.pdf" }
                 ],
@@ -368,12 +407,12 @@
                 "site": "LAN",
                 "title": "Protocole préélectoral 2026 Lannion",
                 "tags": ["#lan", "#2026"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.11 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CGT.",
                 "finalVersionDate": "15/07/2026",
                 "content": "Élections CSE-E Lannion par vote électronique : 1er tour du 23 au 25/11/2026, 2nd tour du 02 au 04/12/2026. Collège 2 : 1 titulaire + 1 suppléant ; collège 3 : 11 + 11. Délégation 26 h/mois.",
-                "cgtPosition": "",
+                "cgtPosition": "Modalités électorales (vote électronique, calendrier, collèges, nombre de sièges, répartition H/F) négociées en commun avec Paris-Saclay et jugées conformes.",
                 "tract": "-",
                 "documents": [
                     { "title": "2026 protocole accord prééctoral LANNION signé.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/2026%20protocole%20accord%20pr%C3%A9%C3%A9ctoral%20LANNION%20sign%C3%A9.pdf", "signatureTarget": "captures_signatures/rh_2026_protocole_accord_preectoral_LANNION_signe_p11_signature.jpg" }
@@ -384,12 +423,12 @@
                 "site": "NPS",
                 "title": "Protocole préélectoral 2026",
                 "tags": ["#nps", "#2026"],
-                "validity": "✅",
-                "signatures": ["cgt", "cfdt", "cfe"],
+                "accord": "accord",
+                "signatures": ["cgt", "cfdt", "cfe", "cftc"],
                 "signatureSource": "p.11 : signatures de la Direction, de la CFDT, de la CFE-CGC, de la CFTC et de la CGT.",
                 "finalVersionDate": "15/07/2026",
                 "content": "Élections CSE-E Paris-Saclay par vote électronique : 1er tour du 23 au 25/11/2026, 2nd tour en décembre 2026. Effectifs de référence au 31/05/2026 (≈ 2 150).",
-                "cgtPosition": "",
+                "cgtPosition": "Modalités électorales (vote électronique, calendrier, collèges, nombre de sièges, répartition H/F, effectifs de référence) jugées conformes.",
                 "tract": "-",
                 "documents": [
                     { "title": "2026 protocole accord préélectoral signé.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/2026%20protocole%20accord%20pr%C3%A9%C3%A9lectoral%20sign%C3%A9.pdf", "signatureTarget": "captures_signatures/rh_2026_protocole_accord_preelectoral_signe_p11_signature.jpg" }
@@ -400,12 +439,12 @@
                 "site": "NNF",
                 "title": "Avenant CSE",
                 "tags": ["#nnf", "#2026"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.10 : signatures de la CFDT, de la CFE-CGC et de la CGT (signature électronique).",
                 "finalVersionDate": "09/07/2026",
                 "content": "La restauration sort des ASC des CSE d'établissement et passe à la Direction ; budget ASC et commission restauration revus.",
-                "cgtPosition": "Signataire.",
+                "cgtPosition": "Contenu : la restauration sort des ASC des CSE-E et passe en gestion Direction (budget ASC modifié, commission restauration redéfinie). Avis favorable de toutes les OS sur le projet.",
                 "tract": "-",
                 "documents": [
                     { "title": "Avenant nº 1 à l'Accord CSE du 21 septembre 2018.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/Avenant%20n%C2%BA%201%20%C3%A0%20l'Accord%20CSE%20du%2021%20septembre%202018.pdf", "signatureTarget": "captures_signatures/rh_Avenant_no_1_a_l_Accord_CSE_du_21_septembre_2018_p10_signature.jpg" }
@@ -416,12 +455,12 @@
                 "site": "NNF",
                 "title": "Handicap",
                 "tags": ["#nnf", "#2026"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.15–16 : signatures de la Direction (p.15), de la CFDT, de la CFE-CGC et de la CGT (p.16).",
                 "finalVersionDate": "19/06/2026",
                 "content": "Politique handicap NNF : rôles des acteurs (managers, santé au travail, service social, Mission handicap). Cotisations retraite prises en charge à 100 % en temps partiel choisi.",
-                "cgtPosition": "Signataire (vote en AG extraordinaire du 21/05/2026).",
+                "cgtPosition": "Contre : pas de budget spécifique ni d'heures de délégation pour les référents ; mission handicap réduite à 1 personne nommée par la Direction ; élus non associés aux décisions (commission paritaire supprimée, simple bilan annuel) ; maintien dans l'emploi en recul par rapport à 2021 ; jours d'absence sur demande avec justificatif. Demandes CGT non retenues : rôle formalisé de la CSSCT, secrétaire CSSCT dans la mission handicap, lien AGEFIPH, mesures contre le plafond de verre (bac+2/3). Pour : sans accord, seulement le minimum légal (ni aide de 200 €, ni jours de congé) ; CSSCT associée aux études de poste ; TPC prolongeable au-delà de 5 ans avec retraite et prévoyance à 100 %.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord d'entreprise relatif à la situation de handicap NNF.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/Accord%20d'entreprise%20relatif%20%C3%A0%20la%20situation%20de%20handicap%20NNF.pdf", "signatureTarget": "captures_signatures/rh_Accord_d_entreprise_relatif_a_la_situation_de_handicap_NNF_p15-16_signatures.jpg" }
@@ -432,12 +471,12 @@
                 "site": "LAN",
                 "title": "Prorogation des mandats CSE-E Lannion",
                 "tags": ["#lan", "#2026"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.5 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CGT.",
                 "finalVersionDate": "18/05/2026",
                 "content": "Mandats CSE-E Lannion prolongés du 17/11/2026 au 06/12/2026 pour aligner les élections sur celles de Paris-Saclay.",
-                "cgtPosition": "",
+                "cgtPosition": "Prorogation technique des mandats CSE-E Lannion (17/11 → 06/12/2026) pour aligner les élections sur celles de Paris-Saclay ; aucun enjeu de fond défavorable.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord Etablissement Prorogation des Mandats CSE-E Lannion.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/Accord%20Etablissement%20Prorogation%20des%20Mandats%20CSE-E%20Lannion.pdf", "signatureTarget": "captures_signatures/rh_Accord_Etablissement_Prorogation_des_Mandats_CSE_E_Lannion_p05_signature.jpg" }
@@ -448,12 +487,12 @@
                 "site": "NNF",
                 "title": "NAO 2026",
                 "tags": ["#salaires", "#nnf", "#2026"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.7 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CGT.",
                 "finalVersionDate": "24/01/2026",
                 "content": "Pas d'augmentation générale. Augmentations individuelles 2,15 % (promotions incluses) au 01/04/2026. Primes de transport : zone 1 9 €, zone 2 12 €, zone 3 60 €.",
-                "cgtPosition": "Signataire (confirmation par courriel).",
+                "cgtPosition": "Pour : enveloppe portée de 1,85 % à 2,15 % (+0,30 point) conditionnée à la signature, avec hausse des primes de transport (vélo 400 → 500 €, indemnité kilométrique) et des primes d'intervention (forfait 265 € au lieu de 250 €) ; mobilisation jugée difficile. Contre : aucune augmentation générale ; revendications CGT refusées (rattrapage de 5 % depuis 2021 + 4 %) ; individualisation ; les femmes restent moins augmentées, écart plus fort à Lannion.",
                 "tract": "-",
                 "documents": [
                     { "title": "NAO_2026_Procès_verbal_d_accord_24 janvier_2026.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/NAO_2026_Proc%C3%A8s_verbal_d_accord_24%20janvier_2026.pdf", "signatureTarget": "captures_signatures/rh_NAO_2026_Proces_verbal_d_accord_24_janvier_2026_p07_signature.jpg" }
@@ -464,12 +503,12 @@
                 "site": "NNF",
                 "title": "Avenant RCC 2026 n°1",
                 "tags": ["#effectifs", "#nnf", "#2026"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cfdt", "cfe"],
                 "signatureSource": "p.7 : signatures de la CFDT et de la CFE-CGC ; aucune signature de la CGT.",
                 "finalVersionDate": "15/01/2026",
                 "content": "Modifie l'article 2.5 « Réponse apportée au salarié » (départs volontaires), suite aux observations de l'inspection du travail.",
-                "cgtPosition": "Non signataire de l'accord et de l'avenant.",
+                "cgtPosition": "Avenant de procédure (article 2.5, suite aux observations de l'inspection du travail) à une RCC que la CGT n'a pas signée.",
                 "tract": "-",
                 "documents": [
                     { "title": "Avenant RCC 2025.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202025/Avenant%20RCC%202025.pdf", "signatureTarget": "captures_signatures/rh_Avenant_RCC_2025_p07_signature.jpg" }
@@ -480,12 +519,12 @@
                 "site": "NPS",
                 "title": "Aménagement du temps de travail 2026",
                 "tags": ["#rtt", "#nps", "#2026"],
-                "validity": "✅",
-                "signatures": ["cgt", "cfdt", "cfe"],
+                "accord": "accord",
+                "signatures": ["cgt", "cfdt", "cfe", "cftc"],
                 "signatureSource": "p.3 : signatures de la Direction, de la CFDT, de la CFE-CGC, de la CGT et de la CFTC.",
                 "finalVersionDate": "19/12/2025",
                 "content": "1 JRTT/JRS collectif le vendredi 15/05/2026 (pont de l'Ascension). Journée de solidarité le lundi de Pentecôte 25/05/2026.",
-                "cgtPosition": "Signataire.",
+                "cgtPosition": "Fixation des ponts : 1 JRTT/JRS collectif le 15/05/2026 et journée de solidarité le 25/05/2026 ; accord technique sans recul.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord Aménagement Temps Travail NPS 2026 (19 décembre 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Temps%20de%20travail/Accord%20Am%C3%A9nagement%20Temps%20Travail%20NPS%202026%20(19%20d%C3%A9cembre%202025).pdf", "signatureTarget": "captures_signatures/rh_Accord_Amenagement_Temps_Travail_NPS_2026_19_decembre_2025_p03_signature.jpg" }
@@ -496,12 +535,12 @@
                 "site": "NNF",
                 "title": "RCC 2026 n°1",
                 "tags": ["#effectifs", "#nnf", "#2026"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cfdt", "cfe"],
                 "signatureSource": "p.52 : signatures de la CFDT et de la CFE-CGC ; aucune signature de la CGT. Confirmé par l'avenant et la décision DREETS (76,51 %).",
                 "finalVersionDate": "19/12/2025",
                 "content": "421 départs volontaires maximum. Candidatures jusqu'au 28/02/2026, départs d'avril à fin juin 2026. Congé de mobilité, congé de fin de carrière.",
-                "cgtPosition": "Refus : suppressions massives, RCC répétitives, pas de garantie d'emploi ni d'embauche, pressions au volontariat.",
+                "cgtPosition": "Jusqu'à 421 suppressions de postes non justifiées par la charge de travail ; RCC à répétition ; ni garantie d'emploi ni embauche ; externalisations et perte de compétences ; critères de substitution ; pression au volontariat.",
                 "tract": [
                     { "title": "Pour ceux qui restent – La CGT n'accompagne pas l'euthanasie des télécoms en France", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract_pour_ceux_qui_restent.pdf" }
                 ],
@@ -514,12 +553,12 @@
                 "site": "NNF",
                 "title": "Plan d'Epargne Entreprise (PEE)",
                 "tags": ["#nnf", "#2025"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cfdt", "cfe"],
                 "signatureSource": "p.17–18 : signatures de la Direction (p.17), de la CFDT et de la CFE-CGC (p.18) ; aucune signature de la CGT.",
                 "finalVersionDate": "16/12/2025",
                 "content": "PEE propre à NNF : sélection des fonds (ISR), abondement concentré sur l'actionnariat Nokia.",
-                "cgtPosition": "Défavorable : épargne individualisée, rémunération « TTC », préférence pour un 13e mois cotisé. Vote non retrouvé.",
+                "cgtPosition": "Abondement concentré sur les actions Nokia, rémunération « TTC », exonérations de cotisations ; préférence pour un 13e mois cotisé.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord d'entreprise relatif au Plan d'Epargne Entreprise au sein de Nokia Networks France (16 décembre 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'entreprise%20relatif%20au%20Plan%20d'Epargne%20Entreprise%20au%20sein%20de%20Nokia%20Networks%20France%20(16%20d%C3%A9cembre%202025).pdf", "signatureTarget": "captures_signatures/rh_Accord_d_entreprise_relatif_au_Plan_d_Epargne_Entreprise_au_sein_de_Noki_p17-18_signatures.jpg" }
@@ -530,12 +569,12 @@
                 "site": "NNF",
                 "title": "Plan d'Epargne Retraite d'Entreprise Collectif (PERCOL)",
                 "tags": ["#nnf", "#2025"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cfdt", "cfe"],
                 "signatureSource": "p.20–21 : signatures de la Direction (p.20), de la CFDT et de la CFE-CGC (p.21) ; aucune signature de la CGT.",
                 "finalVersionDate": "16/12/2025",
                 "content": "PERCOL propre à NNF : gestion libre ou pilotée, abondement, transfert collectif des avoirs.",
-                "cgtPosition": "Défavorable : retraite par capitalisation, perte de cotisations sociales. Vote non retrouvé.",
+                "cgtPosition": "Retraite par capitalisation contre la répartition, perte de cotisations sociales ; préférence pour un 13e mois cotisé.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord d'entreprise relatif au Plan d'Epargne Retraite d'Entreprise Collectif PERCOL (16 décembre 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'entreprise%20relatif%20au%20Plan%20d'Epargne%20Retraite%20d'Entreprise%20Collectif%20PERCOL%20(16%20d%C3%A9cembre%202025).pdf", "signatureTarget": "captures_signatures/rh_Accord_d_entreprise_relatif_au_Plan_d_Epargne_Retraite_d_Entreprise_Coll_p20-21_signatures.jpg" }
@@ -546,17 +585,17 @@
                 "site": "NNF",
                 "title": "GEPP – PV de désaccord",
                 "tags": ["#nnf", "#2025"],
-                "validity": "✅",
+                "accord": "Pas d'accord",
                 "signatures": [],
                 "signatureSource": "PV de désaccord valide unilatéralement ; aucun accord collectif n’a été signé.",
                 "finalVersionDate": "30/09/2025",
                 "content": "Pas d'accord sur la GEPP.",
-                "cgtPosition": "Contestation : pas d'engagement d'embauche ni de remplacement des départs, garanties insuffisantes sur les activités en France.",
+                "cgtPosition": "Pas d'engagement d'embauche ni de remplacement des départs, garanties insuffisantes sur les activités en France.",
                 "tract": [
                     { "title": "Happy Thanksgiving chez Nokia – L'industrie française dindon de la farce", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract_rcc_2026.pdf" }
                 ],
                 "documents": [
-                    { "title": "GEPP PV de désaccord mis à signature.pdf", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/copies/GEPP%20PV%20de%20d%C3%A9saccord%20mis%20%C3%A0%20signature.pdf", "signatureTarget": "captures_signatures/cgt_GEPP_PV_de_desaccord_mis_a_signature_p12_signature.jpg" }
+                    { "title": "GEPP PV de désaccord mis à signature.pdf", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/copies/GEPP%20PV%20de%20d%C3%A9saccord%20mis%20%C3%A0%20signature.pdf" }
                 ]
             },
             {
@@ -564,12 +603,12 @@
                 "site": "NNF",
                 "title": "CET",
                 "tags": ["#nnf", "#2025"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cfdt", "cfe"],
                 "signatureSource": "p.13–14 : signatures de la Direction (p.13), de la CFDT et de la CFE-CGC (p.14) ; aucune signature de la CGT.",
                 "finalVersionDate": "24/07/2025",
                 "content": "Ouverture après 6 mois de présence. Monétisation 1 fois par an (juin), 10 jours max. 5e semaine non monétisable.",
-                "cgtPosition": "À vérifier : critique d'une négociation rapide, dernier round supprimé, pas de texte final avant le vote, risque de monétisation des congés.",
+                "cgtPosition": "Pour : souplesse pour les salariés, jour supplémentaire à Lannion. Contre : monétisation des congés (repos transformé en argent), 5e semaine exclue mais logique banalisée.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord CET (24 juillet 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20CET%20(24%20juillet%202025).pdf", "signatureTarget": "captures_signatures/rh_Accord_CET_24_juillet_2025_p13-14_signatures.jpg" }
@@ -580,12 +619,12 @@
                 "site": "NNF",
                 "title": "Avenant frais de santé",
                 "tags": ["#nnf", "#2025"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.5–6 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CGT.",
                 "finalVersionDate": "09/04/2025",
                 "content": "Cotisations santé réparties 60 % employeur / 40 % salarié (T1, T2 et forfait), avec effet rétroactif au 01/01/2025.",
-                "cgtPosition": "",
+                "cgtPosition": "Régime AUXAD : contrepartie obtenue, prise en charge de la mutuelle à 60 % par l'employeur (contre 50 %) et +1 % de masse salariale dans la formule d'intéressement.",
                 "tract": "-",
                 "documents": [
                     { "title": "Avenant frais de santé (9 avril 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Avenant%20frais%20de%20sant%C3%A9%20(9%20avril%202025).pdf", "signatureTarget": "captures_signatures/rh_Avenant_frais_de_sante_9_avril_2025_p05-06_signatures.jpg" }
@@ -596,12 +635,12 @@
                 "site": "NNF",
                 "title": "Intéressement 2025-2028",
                 "tags": ["#salaires", "#nnf", "#2025"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.16 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CGT.",
                 "finalVersionDate": "28/03/2025",
                 "content": "Enveloppe max = 4 % de la masse salariale selon CA (50 %), brevets/publications (25 %), mobilité durable (25 %). Répartition 50 % présence, 50 % salaire.",
-                "cgtPosition": "Signataire.",
+                "cgtPosition": "Mêmes bases que l'accord précédent, qui a donné de bons niveaux d'intéressement ; part de la masse salariale dans la formule portée de 3 % à 4 %, en contrepartie de la signature AUXAD.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord d'intéressement 2025-2028.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'int%C3%A9ressement%202025-2028.pdf", "signatureTarget": "captures_signatures/rh_Accord_d_interessement_2025_2028_p16_signature.jpg" }
@@ -612,17 +651,17 @@
                 "site": "NNF",
                 "title": "NAO 2025 – PV de désaccord",
                 "tags": ["#salaires", "#nnf", "#2025"],
-                "validity": "✅",
+                "accord": "Pas d'accord",
                 "signatures": [],
                 "signatureSource": "PV de désaccord valide unilatéralement ; aucun accord collectif n’a été signé.",
                 "finalVersionDate": "27/03/2025",
                 "content": "Pas d'accord sur les salaires 2025.",
-                "cgtPosition": "Refus : perte d'environ 4 % de pouvoir d'achat depuis 2021, trop d'individuel, pas de mesure générale. Blocage des calendriers (~600 salariés).",
+                "cgtPosition": "Perte d'environ 4 % de pouvoir d'achat depuis 2021 ; enveloppe d'environ 2 % (0,68 % après inflation), trop d'individuel, pas de mesure générale.",
                 "tract": [
                     { "title": "Salaires +0,68 % – Les négos ça ne marche pas, il faut se mobiliser", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract-salaires-2025.pdf" }
                 ],
                 "documents": [
-                    { "title": "Procès verbal NAO (désaccord) 2025 (27 mars 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Proc%C3%A8s%20verbal%20NAO%20(d%C3%A9saccord)%202025%20(27%20mars%202025).pdf", "signatureTarget": "captures_signatures/rh_Proces_verbal_NAO_desaccord_2025_27_mars_2025_p11_signature.jpg" }
+                    { "title": "Procès verbal NAO (désaccord) 2025 (27 mars 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Proc%C3%A8s%20verbal%20NAO%20(d%C3%A9saccord)%202025%20(27%20mars%202025).pdf" }
                 ]
             },
             {
@@ -630,12 +669,12 @@
                 "site": "LAN",
                 "title": "Avenant ARTT Lannion",
                 "tags": ["#lan", "#2025"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cfdt"],
                 "signatureSource": "p.8 : signatures de la Direction et de la CFDT ; aucune signature de la CFE-CGC ni de la CGT.",
                 "finalVersionDate": "20/03/2025",
                 "content": "3 JRTT/JRS supplémentaires en 2025, alignement sur Paris-Saclay (jusqu'à 3 jours fixés chaque année en NAO). Congés familiaux supprimés ; prime de crèche fermée aux nouveaux entrants au 01/01/2026.",
-                "cgtPosition": "",
+                "cgtPosition": "Pour : 1 jour de repos supplémentaire pour tous, aligné sur Paris-Saclay. Contre : prime de crèche (80 €/mois jusqu'aux 4 ans de l'enfant) fermée aux nouveaux entrants au 01/01/2026, congés familiaux supprimés ; risque de préparer un établissement unique NPS + Lannion.",
                 "tract": "-",
                 "documents": [
                     { "title": "Avenant Accord ARTT Lannion 20 03 2025.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Avenant%20Accord%20ARTT%20Lannion%2020%2003%202025.pdf", "signatureTarget": "captures_signatures/rh_Avenant_Accord_ARTT_Lannion_20_03_2025_p08_signature.jpg" }
@@ -646,12 +685,12 @@
                 "site": "LAN",
                 "title": "Avenant horaire variable Lannion",
                 "tags": ["#lan", "#2025"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cfdt"],
                 "signatureSource": "p.7 : signatures de la Direction et de la CFDT ; aucune signature de la CFE-CGC ni de la CGT.",
                 "finalVersionDate": "20/03/2025",
                 "content": "Plages variables 7h30–9h30, 11h30–14h, 16h–19h (15h–19h le vendredi) ; plages fixes 9h30–11h30 et 14h–16h. Pause déjeuner 45 min obligatoire, crédit/débit limité à ±8 h.",
-                "cgtPosition": "",
+                "cgtPosition": "Aucune solution pour les salariés aux compteurs d'heures positifs (remise à zéro = heures non payées, non cotisées).",
                 "tract": "-",
                 "documents": [
                     { "title": "Avenant Accord Horaire Variable Lannion 20 03 2025.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Avenant%20Accord%20Horaire%20Variable%20Lannion%2020%2003%202025.pdf", "signatureTarget": "captures_signatures/rh_Avenant_Accord_Horaire_Variable_Lannion_20_03_2025_p07_signature.jpg" }
@@ -662,12 +701,12 @@
                 "site": "NNF",
                 "title": "Avenant télétravail",
                 "tags": ["#nnf", "#2025"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cfdt", "cfe"],
                 "signatureSource": "p.7 : signatures de la CFDT et de la CFE-CGC ; aucune signature de la CGT.",
                 "finalVersionDate": "24/02/2025",
                 "content": "Aide à l'équipement de 300 € (note de frais, sous 6 mois). Indemnité de télétravail de 4 € à 4,40 €, sans indexation.",
-                "cgtPosition": "Non signataire : rapport de force jugé suffisant pour obtenir plus, refus de l'absence d'indexation, aide non renouvelable.",
+                "cgtPosition": "Pour : indemnité +10 % (4 € → 4,40 €), maintien de l'accord, aide à l'équipement de 300 € plus favorable que le dispositif corporate. Contre : pas d'indexation, aide non renouvelable, hausse financée par les sommes non utilisées ; accord initial non signé par la CGT.",
                 "tract": [
                     { "title": "Avenant Télétravail : signer pour 40 centimes ? Chronique d'une occasion manquée", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract-avenant-TL-v2.pdf" }
                 ],
@@ -680,12 +719,12 @@
                 "site": "NPS",
                 "title": "Aménagement du temps de travail 2025",
                 "tags": ["#rtt", "#nps", "#2025"],
-                "validity": "✅",
-                "signatures": ["cgt", "cfdt", "cfe"],
+                "accord": "accord",
+                "signatures": ["cgt", "cfdt", "cfe", "cftc"],
                 "signatureSource": "p.4 : signatures de la Direction, de la CFDT, de la CFE-CGC, de la CGT et de la CFTC.",
                 "finalVersionDate": "20/01/2025",
                 "content": "Journée de solidarité le lundi de Pentecôte 09/06/2025 (7 h).",
-                "cgtPosition": "Signataire.",
+                "cgtPosition": "Fixation des ponts et de la journée de solidarité 2025 ; accord technique sans recul.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord 2025 NPS - aménagement temps de travail (20 janvier 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Archive/SOP%20-%20Guidelines%20-%20HARMONIZED/Accord%202025%20NPS%20-%20am%C3%A9nagement%20temps%20de%20travail%20(20%20janvier%202025).pdf", "signatureTarget": "captures_signatures/rh_Accord_2025_NPS_amenagement_temps_de_travail_20_janvier_2025_p04_signature.jpg" }
@@ -696,12 +735,12 @@
                 "site": "NNF",
                 "title": "Don de jours",
                 "tags": ["#nnf", "#2024"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.11 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CGT.",
                 "finalVersionDate": "14/11/2024",
                 "content": "Don de jours élargi aux aidants (enfant, conjoint, parent). Plafonds de 20 ou 10 jours ; commission paritaire pour les cas hors cadre.",
-                "cgtPosition": "Signataire : soutien à l'élargissement, demande d'un seuil préservant les congés des aidants.",
+                "cgtPosition": "Soutien à l'élargissement, demande d'un seuil préservant les congés des aidants.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord don de jours 14 novembre 2024.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20don%20de%20jours%2014%20novembre%202024.pdf", "signatureTarget": "captures_signatures/rh_Accord_don_de_jours_14_novembre_2024_p11_signature.jpg" }
@@ -712,28 +751,28 @@
                 "site": "NNF",
                 "title": "Partage de la valeur – PV de désaccord",
                 "tags": ["#nnf", "#2024"],
-                "validity": "✅",
+                "accord": "Pas d'accord",
                 "signatures": [],
                 "signatureSource": "PV de désaccord valide unilatéralement ; aucun accord collectif n’a été signé.",
                 "finalVersionDate": "03/09/2024",
-                "content": "Pas d'accord. Décision unilatérale : prime négociée seulement si bénéfice net fiscal > 15 % du CA France.",
-                "cgtPosition": "Non signataire.",
+                "content": "Décision unilatérale : prime négociée seulement si bénéfice net fiscal > 15 % du CA France.",
+                "cgtPosition": "Versement conditionné à un bénéfice net fiscal > 15 % du CA, inatteignable vu le déficit comptable de NNF (héritage Alcatel-Lucent, R&D sous-facturée à la maison mère) : aucune prime possible en pratique. Revendication : du salaire fixe plutôt que des primes.",
                 "tract": "-",
                 "documents": [
-                    { "title": "PV désaccord Partage de la valeur VS.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/PV%20d%C3%A9saccord%20Partage%20de%20la%20valeur%20VS.pdf", "signatureTarget": "captures_signatures/rh_PV_desaccord_Partage_de_la_valeur_VS_p06_signature.jpg" }
+                    { "title": "PV désaccord Partage de la valeur VS.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/PV%20d%C3%A9saccord%20Partage%20de%20la%20valeur%20VS.pdf" }
                 ]
             },
             {
                 "year": "2024",
-                "site": "NNF",
+                "site": "NPS",
                 "title": "RCC 2024",
-                "tags": ["#effectifs", "#nnf", "#2024"],
-                "validity": "✅",
-                "signatures": ["cgt", "cfdt", "cfe"],
+                "tags": ["#effectifs", "#nps", "#2024"],
+                "accord": "accord",
+                "signatures": ["cgt", "cfdt", "cfe", "cftc"],
                 "signatureSource": "p.47 : signatures de la Direction, de la CFDT, de la CFE-CGC, de la CGT et de la CFTC.",
                 "finalVersionDate": "19/04/2024",
                 "content": "347 départs volontaires max. Congé de mobilité 1 à 24 mois (75 %), congé de fin de carrière (220 000 € max), indemnité complémentaire de 5 mois (min. 25 000 €), aide à la création 8 000 €.",
-                "cgtPosition": "Signataire, puis bilan critique : délocalisations, perte de savoir-faire, charge de travail, RPS, externalisations.",
+                "cgtPosition": "Pour : mesures individuelles de départ jugées correctes et alternative à un PSE. Contre (bilan a posteriori) : délocalisations, perte de savoir-faire, charge de travail, RPS, externalisations.",
                 "tract": [
                     { "title": "Bilan de la RCC 2024 – Nokia a (encore) montré son vrai visage", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2024/tract_bilan_rcc24_v4.pdf" }
                 ],
@@ -746,17 +785,17 @@
                 "site": "NNF",
                 "title": "NAO 2024 – PV de désaccord",
                 "tags": ["#salaires", "#nnf", "#2024"],
-                "validity": "✅",
+                "accord": "Pas d'accord",
                 "signatures": [],
                 "signatureSource": "PV de désaccord valide unilatéralement ; aucun accord collectif n’a été signé.",
                 "finalVersionDate": "09/04/2024",
                 "content": "Pas d'accord sur les salaires 2024.",
-                "cgtPosition": "À vérifier : mobilisation intersyndicale contre la faiblesse des augmentations.",
+                "cgtPosition": "Augmentations bien inférieures à l'inflation, d'où une baisse des salaires réels ; pas de mesure générale ; NAO suivie d'une RCC (357 suppressions, dont 1/3 en R&D).",
                 "tract": [
                     { "title": "NAO -> RCC -> REPEAT – L'urgence de la radicalité", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2024/tract_retour_salaires_2024_v1.pdf" }
                 ],
                 "documents": [
-                    { "title": "Avenant Procès-verbal de désaccord NAO 2024 (9 avril 2024).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Avenant%20Proc%C3%A8s-verbal%20de%20d%C3%A9saccord%20NAO%202024%20(9%20avril%202024).pdf", "signatureTarget": "captures_signatures/rh_Avenant_Proces_verbal_de_desaccord_NAO_2024_9_avril_2024_p05_signature.jpg" }
+                    { "title": "Avenant Procès-verbal de désaccord NAO 2024 (9 avril 2024).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Avenant%20Proc%C3%A8s-verbal%20de%20d%C3%A9saccord%20NAO%202024%20(9%20avril%202024).pdf" }
                 ]
             },
             {
@@ -764,12 +803,12 @@
                 "site": "NNF",
                 "title": "Comité Groupe France (CGF)",
                 "tags": ["#nnf", "#2024"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.10 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CGT.",
                 "finalVersionDate": "15/03/2024",
                 "content": "Comité Groupe France (NNF, ASN, RFS).",
-                "cgtPosition": "Signataire, pour maintenir une instance d'examen des résultats des sociétés françaises du groupe.",
+                "cgtPosition": "Maintenir une instance d'examen des résultats des sociétés françaises du groupe.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord CGF.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accord%20CGF.pdf", "signatureTarget": "captures_signatures/rh_Accord_CGF_p10_signature.jpg" }
@@ -780,12 +819,12 @@
                 "site": "LAN",
                 "title": "Mise en place de l'accord-cadre nouvelle CCN Lannion",
                 "tags": ["#lan", "#2024"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.6 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CGT.",
                 "finalVersionDate": "07/03/2024",
                 "content": "Mise en conformité avec la CCN métallurgie au 01/01/2024 : cadres → groupes F à I, mensuels → A à E. Met à jour l'accord horaire variable de 2001 et l'accord Lannion de 2008.",
-                "cgtPosition": "",
+                "cgtPosition": "Contre : nouvelle classification, fiches emplois et cotation des postes ; fin de la reconnaissance des diplômes et de l'expérience, salaire lié au poste, perte possible du statut cadre. Pour : CCN imposée par la branche, l'accord-cadre en encadre la mise en place dans l'entreprise.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord Etablissement NNF Lannion Mise en place accord cadre nouvelle CCN du 7 mars 2024.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20Etablissement%20NNF%20Lannion%20Mise%20en%20place%20accord%20cadre%20nouvelle%20CCN%20du%207%20mars%202024.pdf", "signatureTarget": "captures_signatures/rh_Accord_Etablissement_NNF_Lannion_Mise_en_place_accord_cadre_nouvelle_CCN_p06_signature.jpg" }
@@ -796,12 +835,12 @@
                 "site": "NPS",
                 "title": "Nouvelle convention collective",
                 "tags": ["#nps", "#2024"],
-                "validity": "✅",
-                "signatures": ["cgt", "cfdt", "cfe"],
+                "accord": "accord",
+                "signatures": ["cgt", "cfdt", "cfe", "cftc"],
                 "signatureSource": "p.6 : signatures de la CFDT, de la CFE-CGC, de la CGT et de la CFTC.",
                 "finalVersionDate": "29/02/2024",
                 "content": "Mise en conformité avec la convention de la métallurgie : cadres → groupes F à I, non-cadres → groupes A à E.",
-                "cgtPosition": "Signataire de l'accord-cadre Nokia (NPS), bien que non signataire de la NCC métallurgie au niveau national (désaccords sur la classification et la cotation).",
+                "cgtPosition": "Contre : nouvelle classification, fiches emplois et cotation des postes ; fin de la reconnaissance des diplômes et de l'expérience, salaire lié au poste, perte possible du statut cadre. Pour : CCN imposée par la branche, l'accord-cadre en encadre la mise en place dans l'entreprise.",
                 "tract": [
                     { "title": "Et toi alors, t'es coté combien ?", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/ncc%20cotation%203.pdf" }
                 ],
@@ -814,12 +853,12 @@
                 "site": "NNF",
                 "title": "Mise en place de l'accord-cadre nouvelle CCN",
                 "tags": ["#nnf", "#2024"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.6 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CGT.",
                 "finalVersionDate": "15/02/2024",
                 "content": "Transposition de la CCN métallurgie (en vigueur au 01/01/2024) : cadres → groupes F à I, non-cadres → A à E. Mise à jour des accords CET, harmonisation ALUI, GEPP, temps partiel choisi et horaires atypiques.",
-                "cgtPosition": "",
+                "cgtPosition": "Contre : nouvelle classification, fiches emplois et cotation des postes ; fin de la reconnaissance des diplômes et de l'expérience, salaire lié au poste, perte possible du statut cadre. Pour : CCN imposée par la branche, l'accord-cadre en encadre la mise en place dans l'entreprise.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord collectif mise en place CCN.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20collectif%20mise%20en%20place%20CCN.pdf", "signatureTarget": "captures_signatures/rh_Accord_collectif_mise_en_place_CCN_p06_signature.jpg" }
@@ -830,12 +869,12 @@
                 "site": "NNF",
                 "title": "Harmonisation du taux de bonus",
                 "tags": ["#nnf", "#2023"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.10 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CGT.",
                 "finalVersionDate": "19/12/2023",
                 "content": "Bonus cible aligné au 01/01/2024 sur le taux Nokia du Job Grade : JG5-6 5 %, JG7 7,5 %, JG8 10 %, JG9 12,5 %, JG10 15 %, JG11 20 %, JG12 25 %, JG13 30 %.",
-                "cgtPosition": "À vérifier",
+                "cgtPosition": "L'avocat du CSE-C a obtenu ce que la Direction proposait en échange d'une signature ; fin d'une injustice pour ~400 salariés sous le taux nominal de leur grade.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord harmonisation taux variable cible salariés non sales du 19 décembre 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Archive/Archives/Accords%20Nokia/Accord%20harmonisation%20taux%20variable%20cible%20salari%C3%A9s%20non%20sales%20du%2019%20d%C3%A9cembre%202023.pdf", "signatureTarget": "captures_signatures/rh_Accord_harmonisation_taux_variable_cible_salaries_non_sales_du_19_decemb_p10_signature.jpg" }
@@ -846,12 +885,12 @@
                 "site": "NPS",
                 "title": "Aménagement du temps de travail 2024",
                 "tags": ["#rtt", "#nps", "#2024"],
-                "validity": "✅",
-                "signatures": ["cgt", "cfdt", "cfe"],
+                "accord": "accord",
+                "signatures": ["cgt", "cfdt", "cfe", "cftc"],
                 "signatureSource": "p.4 : signatures de la CFDT, de la CFE-CGC, de la CGT et de la CFTC.",
                 "finalVersionDate": "08/12/2023",
                 "content": "1 JRTT/JRS collectif le 10/05/2024 (pont de l'Ascension). Solidarité le 20/05/2024. 1 jour payé en plus (CTG). Sorties anticipées de 2 h les 24 et 31/12.",
-                "cgtPosition": "Signataire (confirmé par le bilan annuel).",
+                "cgtPosition": "Fixation des ponts et de la journée de solidarité 2024 ; accord technique sans recul.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord aménagement temps travail NPS 2024.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20am%C3%A9nagement%20temps%20travail%20NPS%202024.pdf", "signatureTarget": "captures_signatures/rh_Accord_amenagement_temps_travail_NPS_2024_p04_signature.jpg" }
@@ -862,12 +901,12 @@
                 "site": "NNF",
                 "title": "Substitution non-cadres",
                 "tags": ["#nnf", "#2023"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.9 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CGT.",
                 "finalVersionDate": "30/11/2023",
                 "content": "Substitution pour les non-cadres (groupes A à E) liée à la convention de la métallurgie.",
-                "cgtPosition": "À vérifier : correction demandée (« salaire fixe » au lieu de « salaire de base »).",
+                "cgtPosition": "Correction demandée par la CGT obtenue (« salaire fixe » au lieu de « salaire de base »).",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord de substitution non cadres - 30 novembre 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20de%20substitution%20non%20cadres%20-%2030%20novembre%202023.pdf", "signatureTarget": "captures_signatures/rh_Accord_de_substitution_non_cadres_30_novembre_2023_p09_signature.jpg" }
@@ -878,12 +917,12 @@
                 "site": "NNF",
                 "title": "RCC 2023",
                 "tags": ["#effectifs", "#nnf", "#2023"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt"],
                 "signatureSource": "p.49 : signatures de la Direction, de la CFDT et de la CGT ; aucune signature de la CFE-CGC.",
                 "finalVersionDate": "04/07/2023",
                 "content": "173 départs volontaires max. Congé de mobilité, parcours retraite, aides formation/création/mobilité. Pas de licenciement contraint.",
-                "cgtPosition": "Signataire (logique pragmatique), avec alertes : pressions au volontariat, décimation des équipes, absence de garanties sur les activités en France, lien RCC / absence d'augmentation.",
+                "cgtPosition": "Pour : volontariat, mesures individuelles correctes, éviter un PSE à moyen terme. Points d'alerte : pressions au volontariat, affaiblissement des équipes, absence de garanties sur les activités en France, lien RCC / absence d'augmentation.",
                 "tract": [
                     { "title": "Volontariat RCC : des motifs de vigilance", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20Volontariat%20RCC.pdf" }
                 ],
@@ -896,17 +935,17 @@
                 "site": "NNF",
                 "title": "NAO 2023 – PV de désaccord",
                 "tags": ["#salaires", "#nnf", "#2023"],
-                "validity": "✅",
+                "accord": "Pas d'accord",
                 "signatures": [],
                 "signatureSource": "PV de désaccord valide unilatéralement ; aucun accord collectif n’a été signé.",
                 "finalVersionDate": "12/04/2023",
                 "content": "Pas d'accord. Enveloppe unilatérale : 3,21 % cadres, 5 % non-cadres.",
-                "cgtPosition": "Refus : mesures insuffisantes et trop individualisées. Demande intersyndicale des statistiques réelles d'application.",
+                "cgtPosition": "Mesures insuffisantes et trop individualisées. Demande intersyndicale des statistiques réelles d'application.",
                 "tract": [
                     { "title": "Brèves de printemps", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20br%C3%A8ves%20de%20printemps.pdf" }
                 ],
                 "documents": [
-                    { "title": "NAO 2023 - PV désaccord.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/NAO%202023%20-%20PV%20d%C3%A9saccord.pdf", "signatureTarget": "captures_signatures/rh_NAO_2023_PV_desaccord_p10_signature.jpg" }
+                    { "title": "NAO 2023 - PV désaccord.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/NAO%202023%20-%20PV%20d%C3%A9saccord.pdf" }
                 ]
             },
             {
@@ -914,12 +953,12 @@
                 "site": "NNF",
                 "title": "Égalité professionnelle",
                 "tags": ["#nnf", "#2023"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cfdt", "cfe"],
                 "signatureSource": "p.20 : signatures de la CFDT et de la CFE-CGC ; aucune signature de la CGT.",
                 "finalVersionDate": "12/04/2023",
                 "content": "Référent égalité, objectif d'embauches de femmes, 80 % des managers formés, revue de l'ASR.",
-                "cgtPosition": "Non signataire (détail du vote interne non retrouvé).",
+                "cgtPosition": "Pour : quelques actions (formation des managers, candidature féminine recherchée pour les postes de management). Contre : pas d'enveloppe budgétaire spécifique, aucune amélioration proposée par la CGT retenue.",
                 "tract": [
                     { "title": "Brèves de printemps", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20br%C3%A8ves%20de%20printemps.pdf" }
                 ],
@@ -932,12 +971,12 @@
                 "site": "NPS",
                 "title": "Aménagement du temps de travail 2023",
                 "tags": ["#rtt", "#nps", "#2023"],
-                "validity": "✅",
-                "signatures": ["cgt", "cfdt", "cfe"],
+                "accord": "accord",
+                "signatures": ["cgt", "cfdt", "cfe", "cftc"],
                 "signatureSource": "p.4 : signatures de la Direction, de la CFDT, de la CFE-CGC, de la CGT et de la CFTC.",
                 "finalVersionDate": "10/02/2023",
                 "content": "2 JRTT/JRS collectifs (19/05 et 17/07/2023). Solidarité le 29/05/2023. 1 jour payé en plus (CTG).",
-                "cgtPosition": "Signataire (signature unanime).",
+                "cgtPosition": "Fixation des ponts et de la journée de solidarité 2023 ; accord technique sans recul.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord aménagement temps travail NPS 2023.pdf", "url": "https://nokia.sharepoint.com/:b:/r/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20am%C3%A9nagement%20temps%20travail%20NPS%202023.pdf", "signatureTarget": "captures_signatures/rh_Accord_amenagement_temps_travail_NPS_2023_p04_signature.jpg" }
@@ -948,12 +987,12 @@
                 "site": "LAN",
                 "title": "Nombre de délégués syndicaux Lannion",
                 "tags": ["#lan", "#2023"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.4 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CGT.",
                 "finalVersionDate": "24/01/2023",
                 "content": "+1 délégué syndical par organisation représentative, soit 2 DS. Rétroactif au 17/11/2022, durée indéterminée.",
-                "cgtPosition": "",
+                "cgtPosition": "Augmentation des moyens syndicaux (nombre de DS par OS à Lannion).",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord nombre délégués syndicaux Lannion 24 janvier 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20nombre%20d%C3%A9l%C3%A9gu%C3%A9s%20syndicaux%20Lannion%2024%20janvier%202023.pdf", "signatureTarget": "captures_signatures/rh_Accord_nombre_delegues_syndicaux_Lannion_24_janvier_2023_p04_signature.jpg" }
@@ -964,12 +1003,12 @@
                 "site": "NPS",
                 "title": "Nombre de délégués syndicaux NPS",
                 "tags": ["#nps", "#2023"],
-                "validity": "✅",
-                "signatures": ["cgt", "cfdt", "cfe"],
+                "accord": "accord",
+                "signatures": ["cgt", "cfdt", "cfe", "cftc"],
                 "signatureSource": "p.5 : signatures de la Direction, de la CFDT, de la CFE-CGC, de la CFTC et de la CGT.",
                 "finalVersionDate": "23/01/2023",
                 "content": "+2 délégués syndicaux par organisation représentative, soit jusqu'à 5 DS au lieu de 3, pour le cycle électoral 2022–2026.",
-                "cgtPosition": "",
+                "cgtPosition": "Augmentation des moyens syndicaux (5 DS pour la CGT sur NPS).",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord augmentation nombre délégués syndicaux NPS 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20augmentation%20nombre%20d%C3%A9l%C3%A9gu%C3%A9s%20syndicaux%20NPS%202023.pdf", "signatureTarget": "captures_signatures/rh_Accord_augmentation_nombre_delegues_syndicaux_NPS_2023_p05_signature.jpg" }
@@ -980,63 +1019,15 @@
                 "site": "NNF",
                 "title": "Remboursement santé",
                 "tags": ["#nnf", "#2023"],
-                "validity": "✅",
+                "accord": "accord",
                 "signatures": ["cgt", "cfdt", "cfe"],
                 "signatureSource": "p.11 : signatures de la Direction, de la CFDT, de la CFE-CGC, de la CFTC et de la CGT.",
                 "finalVersionDate": "17/11/2022",
                 "content": "Mutuelle santé : canton La Boétie, Malakoff Humanis, piloté par une commission paritaire.",
-                "cgtPosition": "Signataire (accord signé par toutes les OS représentatives).",
+                "cgtPosition": "Accord sur le régime de remboursement des frais de santé, sans recul identifié.",
                 "tract": "-",
                 "documents": [
                     { "title": "Accord remboursement santé - 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20remboursement%20sant%C3%A9%20-%202023.pdf", "signatureTarget": "captures_signatures/rh_Accord_remboursement_sante_2023_p11_signature.jpg" }
-                ]
-            },
-            {
-                "year": "2023",
-                "site": "NNF",
-                "title": "Prévoyance et assurance complémentaire",
-                "tags": ["#nnf", "#2023"],
-                "validity": "✅",
-                "signatures": ["cgt", "cfdt", "cfe"],
-                "signatureSource": "p.10 : signatures de la Direction, de la CFDT, de la CFE-CGC, de la CFTC et de la CGT.",
-                "finalVersionDate": "17/11/2022",
-                "content": "Prévoyance : T1 95 % employeur / 5 % salarié, T2 et T3 50/50. Assurance accidents vie professionnelle 100 % employeur ; vie privée facultative 50/50. Portabilité 12 mois, effet au 01/01/2023.",
-                "cgtPosition": "",
-                "tract": "-",
-                "documents": [
-                    { "title": "Accord régime prévoyance et assurance complémentaire - 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20r%C3%A9gime%20pr%C3%A9voyance%20et%20assurance%20compl%C3%A9mentaire%20-%202023.pdf", "signatureTarget": "captures_signatures/rh_Accord_regime_prevoyance_et_assurance_complementaire_2023_p10_signature.jpg" }
-                ]
-            },
-            {
-                "year": "2023",
-                "site": "NNF",
-                "title": "Révision-extinction protection sociale complémentaire",
-                "tags": ["#nnf", "#2023"],
-                "validity": "✅",
-                "signatures": ["cfdt", "cfe"],
-                "signatureSource": "p.5 : signatures de la Direction, de la CFDT, de la CFE-CGC et de la CFTC ; aucune signature de la CGT.",
-                "finalVersionDate": "17/11/2022",
-                "content": "Met fin à l'accord du 22/06/1989 et à ses avenants 1 à 5, remplacés par les nouveaux régimes santé et prévoyance au 01/01/2023.",
-                "cgtPosition": "",
-                "tract": "-",
-                "documents": [
-                    { "title": "Avenant révision extinction protection sociale complémentaire - 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Avenant%20r%C3%A9vision%20extinction%20protection%20sociale%20compl%C3%A9mentaire%20-%202023.pdf", "signatureTarget": "captures_signatures/rh_Avenant_revision_extinction_protection_sociale_complementaire_2023_p05_signature.jpg" }
-                ]
-            },
-            {
-                "year": "2022",
-                "site": "NPS",
-                "title": "Établissement unique",
-                "tags": ["#nps", "#2022"],
-                "validity": "✅",
-                "signatures": ["cfdt"],
-                "signatureSource": "p.5 : signatures de la Direction, de la CFDT et de la CFTC ; aucune signature de la CFE-CGC ni de la CGT.",
-                "finalVersionDate": "18/05/2022",
-                "content": "Nozay et Massy forment un établissement unique Paris-Saclay avec un CSE-E commun (+1 titulaire, +1 suppléant). Représentants de proximité avec 8 h/mois de délégation.",
-                "cgtPosition": "",
-                "tract": "-",
-                "documents": [
-                    { "title": "Accord établissement unique 2022.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20%C3%A9tablissement%20unique%202022.pdf", "signatureTarget": "captures_signatures/rh_Accord_etablissement_unique_2022_p05_signature.jpg" }
                 ]
             }
         ];
@@ -1052,47 +1043,91 @@
             content.innerHTML = `
                 <div class="agreement-toolbar">
                     <input id="agreement-search" type="search" placeholder="Rechercher un accord" aria-label="Rechercher un accord">
-                    <select id="agreement-filter" aria-label="Filtrer les accords">
-                        <option value="">Tous les accords</option>
-                        <optgroup label="Site"></optgroup>
-                        <optgroup label="Année"></optgroup>
-                        <optgroup label="Thème">
-                            <option value="theme:salaires">Salaires</option>
-                            <option value="theme:effectifs">Effectifs</option>
-                            <option value="theme:rtt">RTT</option>
-                        </optgroup>
+                    <select id="theme-filter" aria-label="Thème">
+                        <option value="">Tous les thèmes</option>
+                        <option value="salaires">Salaires</option>
+                        <option value="effectifs">Effectifs</option>
                     </select>
+                    <select id="site-filter" aria-label="Périmètre">
+                        <option value="NNF">NNF</option>
+                        <option value="NPS">NPS</option>
+                        <option value="LAN">LAN</option>
+                    </select>
+                    <select id="year-filter" aria-label="Année"></select>
                 </div>
                 <p class="agreement-count" id="agreement-count" aria-live="polite"></p>
                 <div class="agreement-list" id="agreement-list"></div>
             `;
 
             const search = document.getElementById('agreement-search');
-            const agreementFilter = document.getElementById('agreement-filter');
+            const siteFilter = document.getElementById('site-filter');
+            const themeFilter = document.getElementById('theme-filter');
+            const yearFilter = document.getElementById('year-filter');
+            const representativityChart = document.getElementById('representativity-chart');
+            const representativity = {
+                NNF: [['CFDT', 44.28], ['CFE-CGC', 25.42], ['CGT', 21.45], ['CFTC', 8.90]],
+                NPS: [['CFDT', 42.17], ['CFE-CGC', 28.09], ['CGT', 18.20], ['CFTC', 11.54]],
+                LAN: [['CFDT', 51.39], ['CGT', 32.18], ['CFE-CGC', 16.44]]
+            };
+            const unionColors = { CGT: '#e63946', CFDT: '#f4a261', 'CFE-CGC': '#4da3ff', CFTC: '#9aa0aa' };
+
+            function renderRepresentativity(site) {
+                if (!site || !representativity[site]) {
+                    representativityChart.hidden = true;
+                    representativityChart.innerHTML = '';
+                    return;
+                }
+                representativityChart.hidden = false;
+                const results = representativity[site];
+                const total = results.reduce((sum, [, percent]) => sum + percent, 0);
+                let angle = 0;
+                const slices = results.map(([union, percent]) => {
+                    const start = angle;
+                    angle += percent / total * 360;
+                    return `${unionColors[union]} ${start}deg ${angle}deg`;
+                }).join(', ');
+                const format = percent => percent.toLocaleString('fr-FR', { minimumFractionDigits: 2 });
+                const label = ([union, percent]) => {
+                    const note = site === 'NNF' && union === 'CFTC' ? ' (< 10 %, non représentatif)' : '';
+                    return `${union} ${format(percent)} %${note}`;
+                };
+                representativityChart.innerHTML = `
+                    <figcaption class="header-chart-title">Représentativité ${escapeHtml(site)}</figcaption>
+                    <div class="header-chart-pie" role="img" aria-label="Représentativité ${escapeHtml(site)} : ${results.map(label).join(', ')}" style="background: conic-gradient(${slices})"></div>
+                    <ul class="header-chart-legend">
+                        ${results.map(result => {
+                            const [union] = result;
+                            return `<li><span style="background: ${unionColors[union]}"></span>${escapeHtml(label(result))}</li>`;
+                        }).join('')}
+                    </ul>
+                `;
+            }
             const list = document.getElementById('agreement-list');
             const count = document.getElementById('agreement-count');
-            const yearOptions = [...new Set(agreementRows.map(agreement => agreement.year))]
-                .sort((first, second) => first.localeCompare(second))
-                .map(year => `<option value="year:${escapeHtml(year)}">${escapeHtml(year)}</option>`)
-                .join('');
-            agreementFilter.querySelector('optgroup[label="Année"]').innerHTML = yearOptions;
-            const siteLabels = { NNF: 'Entreprise NNF', NPS: 'Établissement NPS', LAN: 'Établissement LAN' };
-            const siteOrder = Object.keys(siteLabels);
-            const siteRank = site => siteOrder.includes(site) ? siteOrder.indexOf(site) : siteOrder.length;
-            const siteOptions = [...new Set(agreementRows.map(agreement => agreement.site))]
-                .sort((first, second) => siteRank(first) - siteRank(second) || first.localeCompare(second))
-                .map(site => `<option value="site:${escapeHtml(site)}">${escapeHtml(siteLabels[site] || site)}</option>`)
-                .join('');
-            agreementFilter.querySelector('optgroup[label="Site"]').innerHTML = siteOptions;
-            agreementFilter.value = 'site:NNF';
 
             function updateList() {
                 const query = search.value.trim().toLocaleLowerCase('fr');
-                const filterValue = agreementFilter.value.split(':')[1] || '';
+                const selectedTheme = themeFilter.value;
+                const allThemes = !selectedTheme;
+                siteFilter.hidden = !allThemes;
+                yearFilter.hidden = !allThemes;
+                const selectedSite = allThemes ? siteFilter.value : '';
+                const availableYears = [...new Set(agreementRows
+                    .filter(agreement => agreement.site === siteFilter.value)
+                    .map(agreement => agreement.year))]
+                    .sort((first, second) => second.localeCompare(first));
+                const previousYear = yearFilter.value;
+                yearFilter.innerHTML = `<option value="">Toutes les années</option>${availableYears
+                    .map(year => `<option value="${escapeHtml(year)}">${escapeHtml(year)}</option>`)
+                    .join('')}`;
+                yearFilter.value = availableYears.includes(previousYear) ? previousYear : '';
+                const selectedYear = allThemes ? yearFilter.value : '';
+                renderRepresentativity(selectedSite);
                 const filtered = agreementRows.filter(agreement => {
                     const tags = Array.isArray(agreement.tags) ? agreement.tags : [];
-                    const matchesFilter = !agreementFilter.value ||
-                        tags.includes(`#${filterValue.toLocaleLowerCase('fr')}`);
+                    const matchesSite = !selectedSite || tags.includes(`#${selectedSite.toLocaleLowerCase('fr')}`);
+                    const matchesTheme = !selectedTheme || tags.includes(`#${selectedTheme}`);
+                    const matchesYear = !selectedYear || tags.includes(`#${selectedYear}`);
                     const searchableValues = [];
                     const visit = value => {
                         if (Array.isArray(value)) value.forEach(visit);
@@ -1102,55 +1137,50 @@
                     visit(agreement);
                     const matchesQuery = !query || searchableValues.join(' ')
                         .toLocaleLowerCase('fr').includes(query);
-                    return matchesFilter && matchesQuery;
+                    return matchesSite && matchesTheme && matchesYear && matchesQuery;
                 });
 
                 count.textContent = `${filtered.length} accord${filtered.length === 1 ? '' : 's'}`;
                 list.innerHTML = filtered.length ? filtered.map(agreement => {
                     const signatures = getSignatures(agreement);
                     const signatureCount = signatures.length;
-                    const validityStatus = agreement.validity;
-                    const isValid = validityStatus === '✅';
-                    const isPending = validityStatus !== '✅' && validityStatus !== '❌';
-                    const isDisagreementReport = /PV de désaccord/i.test(agreement.title);
-                    const validityLabel = isPending
-                        ? `Accord à vérifier : ${signatureCount}/3 signatures confirmées`
-                        : isValid
-                            ? isDisagreementReport
-                                ? 'PV valide : rien à signer'
-                                : `Accord valide : ${signatureCount} signatures confirmées`
-                            : `Accord non valide : ${signatureCount} signatures confirmées sur 3`;
-                    const validityClass = isPending ? 'pending' : isValid ? 'valid' : 'invalid';
-                    const validityText = isPending ? `À vérifier (${signatureCount}/3)` : isValid ? 'Valide' : 'Invalide';
+                    const isAgreement = agreement.accord === 'accord';
+                    const validityLabel = isAgreement
+                        ? `Accord : ${signatureCount} signatures confirmées`
+                        : "Pas d'accord : procès-verbal, aucune signature";
+                    const validityClass = isAgreement ? 'valid' : 'invalid';
+                    const validityText = isAgreement ? 'Accord' : "Pas d'accord majoritaire";
                     const signatureSource = agreement.signatureSource || 'Source de signature non renseignée';
                     const validityTitle = `${validityLabel}. Source : ${signatureSource}`;
                     const signatureLabels = {
-                        cgt: `<img class="cgt-logo" src="${CGT_LOGO_URL}" alt="CGT">`,
+                        cgt: '<strong>CGT</strong>',
                         cfdt: '<strong>CFDT</strong>',
-                        cfe: '<strong>CFE-CGC</strong>',
+                        cfe: '<strong>CFE</strong>',
                         cftc: '<strong>CFTC</strong>'
                     };
-                    const organizations = agreement.site === 'NPS'
-                        ? ['cgt', 'cfdt', 'cfe', 'cftc']
-                        : ['cgt', 'cfdt', 'cfe'];
+                    const organizations = {
+                        NNF: ['cgt', 'cfdt', 'cfe'],
+                        LAN: ['cgt', 'cfdt', 'cfe'],
+                        NPS: ['cgt', 'cfdt', 'cfe', 'cftc']
+                    }[agreement.site] || ['cgt', 'cfdt', 'cfe'];
                     const organizationStatuses = organizations.map(organization => `
-                        <span class="agreement-os-status" title="${escapeHtml(signatureSource)}">${signatureLabels[organization]} ${signatures.includes(organization) ? '✅' : '❌'}</span>
+                        <span class="agreement-os-status" data-union="${organization}" title="${escapeHtml(signatureSource)}">${signatureLabels[organization]} <span class="agreement-mark">${signatures.includes(organization) ? '✅' : '❌'}</span></span>
                     `).join('');
                     const agreementStatus = `<div class="agreement-status">${organizationStatuses}</div>`;
                     const documents = getDocuments(agreement);
                     const documentMetaLinks = documents.map(document => {
                         const label = documents.length > 1
                             ? (document.title || getDocumentName(document.url))
-                            : 'Ouvrir sur le SharePoint';
+                            : (isAgreement ? "Ouvrir l'accord" : "Ouvrir le PV de désaccord");
                         return `<a class="agreement-link agreement-meta-link" href="${escapeHtml(document.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
                     });
                     const documentMetaLink = documents.length > 1
                         ? `<ul class="agreement-document-list">${documentMetaLinks.map(link => `<li>${link}</li>`).join('')}</ul>`
                         : documentMetaLinks.join('');
-                    const signatureMetaLink = isDisagreementReport ? '' : documents
+                    const signatureMetaLink = isAgreement ? documents
                         .filter(document => document.signatureTarget)
                         .map(document => `<a class="agreement-link agreement-meta-link" href="${escapeHtml(document.signatureTarget)}" target="_blank" rel="noopener noreferrer" title="Ouvrir la page de signatures">Voir les signatures ↗</a>`)
-                        .join('');
+                        .join('') : '';
                     const tractLinks = getTracts(agreement).map(tract => {
                         const title = escapeHtml(tract.title || 'Ouvrir le tract');
                         const link = tract.url
@@ -1173,6 +1203,7 @@
                                         ${signatureMetaLink}
                                     </div>
                                     <span class="agreement-content">${escapeHtml(agreement.content || '—')}</span>
+                                    ${agreement.cgtPosition ? `<span class="agreement-content agreement-cgt-position"><strong>Position CGT :</strong> ${escapeHtml(agreement.cgtPosition)}</span>` : ''}
                                     ${tractLinks}
                                 </div>
                             </div>
@@ -1183,7 +1214,9 @@
             }
 
             search.addEventListener('input', updateList);
-            agreementFilter.addEventListener('change', updateList);
+            siteFilter.addEventListener('change', updateList);
+            themeFilter.addEventListener('change', updateList);
+            yearFilter.addEventListener('change', updateList);
             updateList();
         }
 
