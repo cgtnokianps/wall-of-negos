@@ -12,22 +12,36 @@ Les colonnes sont reperees par leur **en-tete**, jamais par leur lettre (l'ordre
 | `Accord ou négociation` | `title` | Titre court, objet seul ; ajouter l'annee quand un objet se repete (NAO, RCC, amenagement du temps de travail). |
 | `URL accord`, `file name accord`, `page signature` | `documents[]` | Meme forme que les tracts : `{ "title", "url", "signatureTarget" }`. `title` est le nom exact du fichier. Plusieurs URLs separees par `, ` donnent plusieurs objets, dans le meme ordre que les noms de fichier. Vide = `[]`. `signatureTarget` est omis s'il n'y a pas de capture. Pas de `%2F` dans le chemin. |
 | `date VF` | `finalVersionDate` | Date finale lue dans le PDF (signature, validation ou page de garde), au format `jj/mm/aaaa`. Vide = `-`. |
-| `accord majoritaire` | `accord` | `TRUE` = `accord` ; `FALSE` = `Pas d'accord`. Un pas d'accord est un PV : `signatures` = `[]`, pas de lien « Voir les signatures », le PDF reste celui du PV. |
+| `accord majoritaire` | `accord` | `TRUE` = `accord` ; `FALSE` = `Pas d'accord` ; toute autre valeur (`À vérifier`) = `À vérifier`. Un pas d'accord est un PV : `signatures` = `[]`, pas de `signatureTarget`, pas de lien « Voir les signatures », le PDF reste celui du PV. |
 | `CGT`, `CFDT`, `CFE-CGC`, `CFTC` | `signatures` | Liste des organisations confirmees : `cgt`, `cfdt`, `cfe`, `cftc`. Seul `TRUE` entre dans la liste. `FALSE`, `À vérifier` et `-` restent dehors. Aucune signature confirmee, ou `Pas d'accord`, = `[]`. |
 | — | `tags` | Derive du titre, du site et de l'annee. NAO ou interessement = `#salaires`. RCC = `#effectifs`. Amenagement du temps de travail = `#rtt`. Site = `#nnf`, `#nps` ou `#lan`. Annee = `#2023`, `#2024`, `#2025`, `#2026` (ou l'annee reelle de la ligne). |
 | `Source signatures` | `signatureSource` | Preferer `p.X : signatures de...` en nommant les organisations visibles et toute absence. Signaler une version non signee. PV de désaccord : `PV de désaccord valide unilatéralement ; aucun accord collectif n’a été signé.` |
 | `Summary` | `content` | Resume court affiche dans l'index. |
-| `Position CGT` | `cgtPosition` | |
+| `Position CGT` | `cgtPosition` | Affiche juste apres le resume, prefixe « Position CGT : ». Vide = ligne non affichee. |
 | `tract associé` | `tract[].title` | Titre du tract. Plusieurs tracts : un titre par ligne, dans l'ordre des URLs. |
 | `URL tract` | `tract[].url` | URL absolue et encodee. `-` = pas de tract (`tract: "-"`). |
 | `autre source (email, teams, sharepoint)`, `file name tract` | — | Non reprises dans l'index (notes de travail / controle). Le nom du fichier tract doit correspondre a la fin de `URL tract`. |
+
+## Affichage
+
+- Badge : `Accord`, ou `Pas d'accord majoritaire`.
+- Lien PDF unique : `Ouvrir l'accord`, ou `Ouvrir le PV de désaccord`.
+- Signatures, toujours dans cet ordre, coche si l'organisation est dans `signatures`, croix sinon : NNF et LAN = CGT, CFDT, CFE ; NPS = CGT, CFDT, CFE, CFTC. Le libelle affiche est `CFE`, pas `CFE-CGC`.
+- Couleurs : CGT `#e63946`, CFDT `#f4a261`, CFE `#4da3ff`, CFTC `#9aa0aa`.
+- Le selecteur de theme est toujours visible (`Tous les thèmes`, `Salaires`, `Effectifs`).
+- Les selecteurs de site (NNF / NPS / LAN) et d'annee n'apparaissent que si `Tous les thèmes` est choisi. L'annee liste les annees du site choisi, y compris NPS et LAN. Un theme precis masque le site, l'annee et la representativite, et liste tous les perimetres de ce theme.
+- Le camembert de representativite (2022) n'est affiche que lorsqu'un site est selectionne, dans l'ordre des resultats :
+  - NNF : CFDT 44,28 %, CFE-CGC 25,42 %, CGT 21,45 %, CFTC 8,90 % (`< 10 %, non représentatif`).
+  - LAN : CFDT 51,39 %, CGT 32,18 %, CFE-CGC 16,44 %.
+  - NPS : CFDT 42,17 %, CFE-CGC 28,09 %, CGT 18,20 %, CFTC 11,54 %.
 
 ## Classement local des PDF
 
 - `copies/` contient uniquement les copies locales CGT39.
 - Les documents HRLibrary et BDESE sont places dans `copies/rh/`.
 - La source RH synchronisee localement est `C:\Users\yelmghaz\Nokia\People library - France`.
-- Le PDF BDESE Handicap provient de `C:\Users\yelmghaz\Nokia\CGT - NPS - Documents\NNF France\negos centrales\accord handicap 2025\ACCORD HANDICAP VERSION REVUE LE 8 juin 2026.pdf` et est copie sous le nom de fichier de la colonne E.
+- Le PDF BDESE Handicap provient de `C:\Users\yelmghaz\Nokia\CGT - NPS - Documents\NNF France\negos centrales\accord handicap 2025\ACCORD HANDICAP VERSION REVUE LE 8 juin 2026.pdf` et est copie sous le nom de `file name accord`.
+- Apres une resynchronisation, supprimer les PDF de `copies/` et les JPG de `captures_signatures/` qui ne sont plus references par le classeur ouvert. `copies/` est ignore par git.
 - Le script ignore un PDF RH deja present dans `copies/rh/` et ne deplace ni ne remplace les copies CGT39 de `copies/`.
 
 ## Captures de signatures
@@ -70,7 +84,7 @@ grep -nE '"(url|signatureTarget)": "(\.\./|20[0-9][0-9]/)' index.html
 - Les tracts doivent utiliser `/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/`.
 - Les tracts ne doivent jamais contenir `salari%C3%A9s/salari%C3%A9s`.
 
-3. Verifier que les titres, noms de fichier, statuts, `signatureSource`, `URL accord` et `page signature` concordent entre Excel et l'index. Les captures `documents[].signatureTarget` doivent exister dans `captures_signatures/`.
+3. Verifier que les titres, noms de fichier, statuts, `signatureSource`, `Summary`, `Position CGT`, `URL accord` et `page signature` concordent entre Excel et l'index. Les captures `documents[].signatureTarget` doivent exister dans `captures_signatures/`. Un PV de desaccord n'a pas de `signatureTarget`.
 
 4. Executer le diagnostic VS Code sur `index.html`.
 
