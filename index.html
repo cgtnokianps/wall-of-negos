@@ -69,18 +69,15 @@
         .header-chart {
             color: var(--text-muted);
             font-size: 0.936em;
-            grid-column: 3;
-            justify-self: end;
-            margin: 0;
-            max-width: 100%;
-            text-align: left;
-            width: max-content;
+            margin: 22px auto 0;
+            max-width: 40em;
+            text-align: center;
         }
 
         .header-chart-pie {
             aspect-ratio: 1;
             border-radius: 50%;
-            margin: 0 0 10px auto;
+            margin: 0 auto 10px;
             width: 120px;
         }
 
@@ -94,8 +91,18 @@
         .header-chart-legend {
             display: grid;
             gap: 2px;
+            justify-items: start;
             list-style: none;
+            margin: 0 auto;
             white-space: normal;
+            width: max-content;
+        }
+
+        .header-chart-summary {
+            color: var(--text);
+            line-height: 1.45;
+            margin: 12px auto 0;
+            max-width: 38em;
         }
 
         .header-chart-legend span {
@@ -316,8 +323,7 @@
             }
 
             .header-chart {
-                grid-column: 1;
-                justify-self: center;
+                margin-top: 16px;
             }
 
             .header h1 {
@@ -354,8 +360,8 @@
             <div class="header-title">
                 <h1>Accords et Négociations Nokia</h1>
                 <p>2023 - 2026</p>
+                <figure class="header-chart" id="representativity-chart" aria-live="polite"></figure>
             </div>
-            <figure class="header-chart" id="representativity-chart" aria-live="polite"></figure>
         </div>
 
         <div id="content"></div>
@@ -1081,11 +1087,16 @@
             const yearFilter = document.getElementById('year-filter');
             const representativityChart = document.getElementById('representativity-chart');
             const representativity = {
-                NNF: [['CFDT', 44.28], ['CFE-CGC', 25.42], ['CGT', 21.45], ['CFTC', 8.90]],
+                NNF: [['CFDT', 48.60], ['CFE-CGC', 27.91], ['CGT', 23.49]],
                 NPS: [['CFDT', 42.17], ['CFE-CGC', 28.09], ['CGT', 18.20], ['CFTC', 11.54]],
                 LAN: [['CFDT', 51.39], ['CGT', 32.18], ['CFE-CGC', 16.44]]
             };
             const unionColors = { CGT: '#e63946', CFDT: '#f4a261', 'CFE-CGC': '#4da3ff', CFTC: '#9aa0aa' };
+            const representativitySummary = {
+                NNF: "Aucune organisation syndicale n'est majoritaire. Il faut la signature d'au moins 2 des 3 syndicats représentatifs pour valider un accord.",
+                NPS: "La CFDT et la CFTC disposent ensemble de la majorité et peuvent valider seules un accord d'établissement.",
+                LAN: "La CFDT est majoritaire à elle seule et peut valider seule un accord d'établissement."
+            };
 
             function renderRepresentativity(site) {
                 if (!site || !representativity[site]) {
@@ -1107,15 +1118,17 @@
                     const note = site === 'NNF' && union === 'CFTC' ? ' (< 10 %, non représentatif)' : '';
                     return `${union} ${format(percent)} %${note}`;
                 };
+                const summary = representativitySummary[site] || '';
                 representativityChart.innerHTML = `
                     <figcaption class="header-chart-title">Représentativité ${escapeHtml(site)}</figcaption>
-                    <div class="header-chart-pie" role="img" aria-label="Représentativité ${escapeHtml(site)} : ${results.map(label).join(', ')}" style="background: conic-gradient(${slices})"></div>
+                    <div class="header-chart-pie" role="img" aria-label="Représentativité ${escapeHtml(site)} : ${results.map(label).join(', ')}. ${escapeHtml(summary)}" style="background: conic-gradient(${slices})"></div>
                     <ul class="header-chart-legend">
                         ${results.map(result => {
                             const [union] = result;
                             return `<li><span style="background: ${unionColors[union]}"></span>${escapeHtml(label(result))}</li>`;
                         }).join('')}
                     </ul>
+                    <p class="header-chart-summary">${escapeHtml(summary)}</p>
                 `;
             }
             const list = document.getElementById('agreement-list');
