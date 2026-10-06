@@ -12,8 +12,8 @@ Les colonnes sont reperees par leur **en-tete**, jamais par leur lettre (l'ordre
 | `Accord ou négociation` | `title` | Titre court, objet seul ; ajouter l'annee quand un objet se repete (NAO, RCC, amenagement du temps de travail). |
 | `URL accord`, `file name accord`, `page signature` | `documents[]` | Meme forme que les tracts : `{ "title", "url", "signatureTarget" }`. `title` est le nom exact du fichier. Plusieurs URLs separees par `, ` donnent plusieurs objets, dans le meme ordre que les noms de fichier. Vide = `[]`. `signatureTarget` est omis s'il n'y a pas de capture. Pas de `%2F` dans le chemin. |
 | `date VF` | `finalVersionDate` | Date finale lue dans le PDF (signature, validation ou page de garde), au format `jj/mm/aaaa`. Vide = `-`. |
-| `accord majoritaire` | `accord` | `TRUE` = `accord` ; `FALSE` = `Pas d'accord` ; toute autre valeur (`À vérifier`) = `À vérifier`. Un pas d'accord est un PV : `signatures` = `[]`, pas de `signatureTarget`, pas de lien « Voir les signatures », le PDF reste celui du PV. |
-| `CGT`, `CFDT`, `CFE-CGC`, `CFTC` | `signatures` | Liste des organisations confirmees : `cgt`, `cfdt`, `cfe`, `cftc`. Seul `TRUE` entre dans la liste. `FALSE`, `À vérifier` et `-` restent dehors. Aucune signature confirmee, ou `Pas d'accord`, = `[]`. |
+| `accord majoritaire` | `accord` | `TRUE` = `accord` ; `FALSE` = `Pas d'accord` ; toute autre valeur (`À vérifier`) = `À vérifier`. Un pas d'accord reste un PV : le PDF est celui du PV, et les signatures confirmees ainsi que `signatureTarget` sont quand meme repris s'ils sont renseignes. |
+| `CGT`, `CFDT`, `CFE-CGC`, `CFTC` | `signatures` | Liste des organisations confirmees : `cgt`, `cfdt`, `cfe`, `cftc`. Seul `TRUE` entre dans la liste, y compris pour un `Pas d'accord`. `FALSE`, `À vérifier` et `-` restent dehors. Aucune signature confirmee = `[]`. |
 | — | `tags` | Derive du titre, du site et de l'annee. NAO ou interessement = `#salaires`. RCC = `#effectifs`. Amenagement du temps de travail = `#rtt`. Site = `#nnf`, `#nps` ou `#lan`. Annee = `#2023`, `#2024`, `#2025`, `#2026` (ou l'annee reelle de la ligne). |
 | `Source signatures` | `signatureSource` | Preferer `p.X : signatures de...` en nommant les organisations visibles et toute absence. Signaler une version non signee. PV de désaccord : `PV de désaccord valide unilatéralement ; aucun accord collectif n’a été signé.` |
 | `Summary` | `content` | Resume court affiche dans l'index. |
@@ -25,7 +25,7 @@ Les colonnes sont reperees par leur **en-tete**, jamais par leur lettre (l'ordre
 ## Affichage
 
 - Badge : `Accord`, ou `Pas d'accord majoritaire`.
-- Lien PDF unique : `Ouvrir l'accord`, ou `Ouvrir le PV de désaccord`.
+- Lien PDF unique : `Ouvrir l'accord`, ou `Ouvrir le PV de désaccord`. `Voir les signatures` s'affiche des qu'une capture existe, sauf pour un `Pas d'accord majoritaire`. Les coches des organisations restent affichees.
 - Signatures, toujours dans cet ordre, coche si l'organisation est dans `signatures`, croix sinon : NNF et LAN = CGT, CFDT, CFE ; NPS = CGT, CFDT, CFE, CFTC. Le libelle affiche est `CFE`, pas `CFE-CGC`.
 - Couleurs : CGT `#e63946`, CFDT `#f4a261`, CFE `#4da3ff`, CFTC `#9aa0aa`.
 - Le selecteur de theme est toujours visible (`Tous les thèmes`, `Salaires`, `Effectifs`).
@@ -84,7 +84,7 @@ grep -nE '"(url|signatureTarget)": "(\.\./|20[0-9][0-9]/)' index.html
 - Les tracts doivent utiliser `/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/`.
 - Les tracts ne doivent jamais contenir `salari%C3%A9s/salari%C3%A9s`.
 
-3. Verifier que les titres, noms de fichier, statuts, `signatureSource`, `Summary`, `Position CGT`, `URL accord` et `page signature` concordent entre Excel et l'index. Les captures `documents[].signatureTarget` doivent exister dans `captures_signatures/`. Un PV de desaccord n'a pas de `signatureTarget`.
+3. Verifier que les titres, noms de fichier, statuts, `signatureSource`, `Summary`, `Position CGT`, `URL accord` et `page signature` concordent entre Excel et l'index. Les captures `documents[].signatureTarget` doivent exister dans `captures_signatures/`. Un PV de desaccord garde son `signatureTarget`, mais le lien « Voir les signatures » n'est pas affiche.
 
 4. Executer le diagnostic VS Code sur `index.html`.
 
