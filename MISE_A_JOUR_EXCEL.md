@@ -30,7 +30,7 @@ Les colonnes sont reperees par leur **en-tete**, jamais par leur lettre (l'ordre
 - Couleurs : CGT `#e63946`, CFDT `#f4a261`, CFE `#4da3ff`, CFTC `#9aa0aa`.
 - Le selecteur de theme est toujours visible (`Tous les thèmes`, `Salaires`, `Effectifs`).
 - Les selecteurs de site (NNF / NPS / LAN) et d'annee n'apparaissent que si `Tous les thèmes` est choisi. L'annee liste les annees du site choisi, y compris NPS et LAN. Un theme precis masque le site, l'annee et la representativite, et liste tous les perimetres de ce theme.
-- Le camembert de representativite (2022) est affiche sous le titre, seulement lorsqu'un site est selectionne, dans l'ordre des resultats :
+- Le camembert de representativite (2022) est affiche sous le titre, seulement lorsqu'un site est selectionne, dans l'ordre des resultats. Le resume commence par un titre en gras : « Representativite entreprise NNF », « Representativite etablissement NPS » ou « Representativite etablissement LAN ».
   - NNF : CFDT 48,60 %, CFE-CGC 27,91 %, CGT 23,49 %. Aucune OS n'est majoritaire : il faut la signature d'au moins 2 des 3 syndicats representatifs.
   - LAN : CFDT 51,39 %, CGT 32,18 %, CFE-CGC 16,44 %. La CFDT est majoritaire et peut valider seule un accord d'etablissement.
   - NPS : CFDT 42,17 %, CFE-CGC 28,09 %, CGT 18,20 %, CFTC 11,54 %. La CFDT et la CFTC ont ensemble la majorite et peuvent valider seules un accord d'etablissement.
