@@ -10,7 +10,7 @@ Les colonnes sont reperees par leur **en-tete**, jamais par leur lettre (l'ordre
 |---|---|---|
 | `année`, `site` | `year`, `site` | |
 | `Accord ou négociation` | `title` | Titre court, objet seul ; ajouter l'annee quand un objet se repete (NAO, RCC, amenagement du temps de travail). |
-| `URL accord`, `file name accord`, `page signature` | `documents[]` | Meme forme que les tracts : `{ "title", "url", "signatureTarget" }`. `title` est le nom exact du fichier. Plusieurs URLs separees par `, ` donnent plusieurs objets, dans le meme ordre que les noms de fichier. Vide = `[]`. `signatureTarget` est omis s'il n'y a pas de capture. Pas de `%2F` dans le chemin. |
+| `URL accord`, `file name accord`, `page signature` | `documents[]` | Meme forme que les tracts : `{ "title", "url", "signatureTarget" }`. `title` est le nom exact du fichier. Plusieurs URLs separees par `, ` donnent plusieurs objets, dans le meme ordre que les noms de fichier. Vide = `[]`. `signatureTarget` reprend l'URL SharePoint de `page signature` ; omis s'il n'y a pas de capture. Pas de `%2F` dans le chemin. |
 | `date VF` | `finalVersionDate` | Date finale lue dans le PDF (signature, validation ou page de garde), au format `jj/mm/aaaa`. Vide = `-`. |
 | `accord majoritaire` | `accord` | `TRUE` = `accord` ; `FALSE` = `Pas d'accord` ; toute autre valeur (`À vérifier`) = `À vérifier`. Un pas d'accord reste un PV : le PDF est celui du PV, et les signatures confirmees ainsi que `signatureTarget` sont quand meme repris s'ils sont renseignes. |
 | `CGT`, `CFDT`, `CFE-CGC`, `CFTC` | `signatures` | Liste des organisations confirmees : `cgt`, `cfdt`, `cfe`, `cftc`. Seul `TRUE` entre dans la liste, y compris pour un `Pas d'accord`. `FALSE`, `À vérifier` et `-` restent dehors. Aucune signature confirmee = `[]`. |
@@ -48,7 +48,7 @@ Les colonnes sont reperees par leur **en-tete**, jamais par leur lettre (l'ordre
 
 Une capture JPG par PDF se trouve dans `captures_signatures/`. Les captures `cgt_` proviennent des PDF de `copies/`; les captures `rh_` proviennent de `copies/rh/`. Fusionner les pages cote a cote lorsque les signatures sont reparties sur plusieurs pages.
 
-Dans l'index, stocker le chemin relatif de la capture dans `documents[].signatureTarget`, par exemple `captures_signatures/rh_nom_p10_signature.jpg`. En Excel, `page signature` contient l'URL SharePoint absolue construite avec le prefixe CGT39 ci-dessus. Si aucune page de signature ou aucun document n'existe, laisser `page signature` vide et omettre `signatureTarget`.
+Dans l'index, stocker l'URL SharePoint de `page signature` dans `documents[].signatureTarget`. Format visionneuse image, pour ouvrir le JPG et non le dossier : `https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_nom_p10_signature.jpg?csf=1&web=1`. En Excel, `page signature` contient la meme URL. Si aucune page de signature ou aucun document n'existe, laisser `page signature` vide et omettre `signatureTarget`.
 
 Verifier chaque capture visuellement : certains scans sont tournes (redresser l'image) et certains PDF locaux ne sont pas signes (ne pas produire de capture dans ce cas).
 
@@ -74,7 +74,7 @@ Le dossier `salariés` apparait une seule fois dans le chemin des tracts.
 1. Verifier qu'il n'existe plus de cible relative :
 
 ```bash
-grep -nE '"(url|signatureTarget)": "(\.\./|20[0-9][0-9]/)' index.html
+grep -nE '"(url|signatureTarget)": "(\.\./|20[0-9][0-9]/|captures_signatures/)' index.html
 ```
 
 2. Verifier les chemins sensibles :
@@ -84,7 +84,7 @@ grep -nE '"(url|signatureTarget)": "(\.\./|20[0-9][0-9]/)' index.html
 - Les tracts doivent utiliser `/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/`.
 - Les tracts ne doivent jamais contenir `salari%C3%A9s/salari%C3%A9s`.
 
-3. Verifier que les titres, noms de fichier, statuts, `signatureSource`, `Summary`, `Position CGT`, `URL accord` et `page signature` concordent entre Excel et l'index. Les captures `documents[].signatureTarget` doivent exister dans `captures_signatures/`. Un PV de desaccord garde son `signatureTarget`, mais le lien « Voir les signatures » n'est pas affiche.
+3. Verifier que les titres, noms de fichier, statuts, `signatureSource`, `Summary`, `Position CGT`, `URL accord` et `page signature` concordent entre Excel et l'index. `documents[].signatureTarget` doit etre l'URL de `page signature`. Les JPG correspondants doivent exister dans `captures_signatures/`. Un PV de desaccord garde son `signatureTarget`, mais le lien « Voir les signatures » n'est pas affiche.
 
 4. Executer le diagnostic VS Code sur `index.html`.
 
