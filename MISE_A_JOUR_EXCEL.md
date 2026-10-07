@@ -2,7 +2,7 @@
 
 ## Principe et colonnes
 
-Lors d'une mise a jour depuis la feuille `accords` de `accords.xlsx`, regenerer `agreementRows` de `index.html` dans l'ordre d'Excel, en appariant les lignes par annee, site et titre.
+Lors d'une mise a jour depuis la feuille `accords` de `accords.xlsx`, regenerer `agreementRows` de `negos_html_files/negos-cgt-2023-2026.html` dans l'ordre d'Excel, en appariant les lignes par annee, site et titre.
 
 Les colonnes sont reperees par leur **en-tete**, jamais par leur lettre (l'ordre change). Le classeur est ouvert depuis SharePoint : le fichier local peut etre en retard sur le dernier enregistrement, lire de preference le classeur ouvert dans Excel.
 
@@ -37,25 +37,26 @@ Les colonnes sont reperees par leur **en-tete**, jamais par leur lettre (l'ordre
 
 ## Classement local des PDF
 
-- `copies/` contient uniquement les copies locales CGT39.
-- Les documents HRLibrary et BDESE sont places dans `copies/rh/`.
+- Le PDF GEPP est dans `negos_html_files/copies/`.
+- Les documents HRLibrary et BDESE sont places dans `copies_rh/`, au meme niveau que `negos_html_files/`.
 - La source RH synchronisee localement est `C:\Users\yelmghaz\Nokia\People library - France`.
 - Le PDF BDESE Handicap provient de `C:\Users\yelmghaz\Nokia\CGT - NPS - Documents\NNF France\negos centrales\accord handicap 2025\ACCORD HANDICAP VERSION REVUE LE 8 juin 2026.pdf` et est copie sous le nom de `file name accord`.
-- Apres une resynchronisation, supprimer les PDF de `copies/` et les JPG de `captures_signatures/` qui ne sont plus references par le classeur ouvert. `copies/` est ignore par git.
-- Le script ignore un PDF RH deja present dans `copies/rh/` et ne deplace ni ne remplace les copies CGT39 de `copies/`.
+- Apres une resynchronisation, supprimer les PDF de `negos_html_files/copies/` et de `copies_rh/`, ainsi que les JPG de `negos_html_files/signatures/`, qui ne sont plus references par le classeur ouvert. Les PDF de `negos_html_files/copies/` et `copies_rh/` sont ignores par git.
+- Le script ignore un PDF RH deja present dans `copies_rh/` et ne deplace ni ne remplace le PDF GEPP de `negos_html_files/copies/`.
 
 ## Captures de signatures
 
-Une capture JPG par PDF se trouve dans `captures_signatures/`. Les captures `cgt_` proviennent des PDF de `copies/`; les captures `rh_` proviennent de `copies/rh/`. Fusionner les pages cote a cote lorsque les signatures sont reparties sur plusieurs pages.
+Une capture JPG par PDF se trouve dans `negos_html_files/signatures/`. Les captures `cgt_` proviennent du PDF GEPP de `negos_html_files/copies/`; les captures `rh_` proviennent de `copies_rh/`. Fusionner les pages cote a cote lorsque les signatures sont reparties sur plusieurs pages.
 
-Dans l'index, stocker l'URL SharePoint de `page signature` dans `documents[].signatureTarget`. Format visionneuse image, pour ouvrir le JPG et non le dossier : `https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_nom_p10_signature.jpg?csf=1&web=1`. En Excel, `page signature` contient la meme URL. Si aucune page de signature ou aucun document n'existe, laisser `page signature` vide et omettre `signatureTarget`.
+Dans l'index, stocker l'URL SharePoint de `page signature` dans `documents[].signatureTarget`. Format visionneuse image, pour ouvrir le JPG et non le dossier : `https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_nom_p10_signature.jpg?csf=1&web=1`. En Excel, `page signature` contient la meme URL. Si aucune page de signature ou aucun document n'existe, laisser `page signature` vide et omettre `signatureTarget`.
 
 Verifier chaque capture visuellement : certains scans sont tournes (redresser l'image) et certains PDF locaux ne sont pas signes (ne pas produire de capture dans ce cas).
 
 Le champ `link` n'est pas utilise dans l'index et ne doit pas etre ajoute. `firstRoundDate` n'est pas conserve dans `agreementRows`.
 
 - Accord HRLibrary : URL commencant par `https://nokia.sharepoint.com/sites/HRLibrary/`.
-- Accord BDESE : URL commencant par `https://nokia.sharepoint.com/sites/BDESENNF-Centrale/`.
+- Accord BDESE Centrale : URL commencant par `https://nokia.sharepoint.com/sites/BDESENNF-Centrale/`.
+- Accord AUXAD : URL visionneuse `:b:/r/` sur `/sites/BDESENNF-CSE-C/`, pas un lien `AllItems.aspx`.
 - Documents CGT39 : URL sous `/sites/CGT39/`.
 - Tracts : URL commencant par `https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/`.
 
@@ -74,18 +75,18 @@ Le dossier `salariés` apparait une seule fois dans le chemin des tracts.
 1. Verifier qu'il n'existe plus de cible relative :
 
 ```bash
-grep -nE '"(url|signatureTarget)": "(\.\./|20[0-9][0-9]/|captures_signatures/)' index.html
+grep -nE '"(url|signatureTarget)": "(\.\./|20[0-9][0-9]/|captures_signatures/)' negos_html_files/negos-cgt-2023-2026.html
 ```
 
 2. Verifier les chemins sensibles :
 
 - HRLibrary ne doit pas contenir `/sites/CGT39/HRLibrary/`.
-- BDESE doit utiliser `/sites/BDESENNF-Centrale/`.
+- BDESE Centrale doit utiliser `/sites/BDESENNF-Centrale/`. AUXAD doit utiliser `:b:/r/sites/BDESENNF-CSE-C/`.
 - Les tracts doivent utiliser `/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/`.
 - Les tracts ne doivent jamais contenir `salari%C3%A9s/salari%C3%A9s`.
 
-3. Verifier que les titres, noms de fichier, statuts, `signatureSource`, `Summary`, `Position CGT`, `URL accord` et `page signature` concordent entre Excel et l'index. `documents[].signatureTarget` doit etre l'URL de `page signature`. Les JPG correspondants doivent exister dans `captures_signatures/`. Un PV de desaccord garde son `signatureTarget`, mais le lien « Voir les signatures » n'est pas affiche.
+3. Verifier que les titres, noms de fichier, statuts, `signatureSource`, `Summary`, `Position CGT`, `URL accord` et `page signature` concordent entre Excel et l'index. `documents[].signatureTarget` doit etre l'URL de `page signature`. Les JPG correspondants doivent exister dans `negos_html_files/signatures/`. Un PV de desaccord garde son `signatureTarget`, mais le lien « Voir les signatures » n'est pas affiche.
 
-4. Executer le diagnostic VS Code sur `index.html`.
+4. Executer le diagnostic VS Code sur `negos_html_files/negos-cgt-2023-2026.html`.
 
 5. Ne modifier `accords.xlsx` que si la mise a jour Excel a ete explicitement demandee.

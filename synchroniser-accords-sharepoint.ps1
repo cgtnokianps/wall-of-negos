@@ -1,8 +1,8 @@
 # Dossiers locaux synchronisés
 $PeopleLibraryPath = "C:\Users\yelmghaz\Nokia\People library - France"
 $CgtDocumentsPath = "C:\Users\yelmghaz\Nokia\CGT - NPS - Documents"
-$ExistingCopiesDir = Join-Path $CgtDocumentsPath "salariés\accords négociés\copies"
-$TargetFolder = Join-Path $ExistingCopiesDir "rh"
+$ExistingCopiesDir = Join-Path $CgtDocumentsPath "salariés\accords négociés\negos_html_files\copies"
+$TargetFolder = Join-Path $CgtDocumentsPath "salariés\accords négociés\copies_rh"
 $RCC2026N1File = "Accord collectif portant sur une Rupture Conventionnelle Collective (RCC) au sein de Nokia Networks France (compressé).pdf"
 $SourcePathOverrides = @{
     $RCC2026N1File = Join-Path $PeopleLibraryPath "Plan-de-transformation\RCC 2025\$RCC2026N1File"

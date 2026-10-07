@@ -353,7 +353,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img class="header-logo" src="logo-cgt.png" alt="Logo CGT">
+            <img class="header-logo" src="images/logo-cgt.png" alt="Logo CGT">
             <div class="header-title">
                 <h1>Accords et Négociations Nokia</h1>
                 <p>2023 - 2026</p>
@@ -378,6 +378,11 @@
             return decodeURIComponent(path.slice(path.lastIndexOf('/') + 1)).replace(/\.pdf$/i, '');
         }
 
+        function openInBrowser(url) {
+            if (!url || typeof url !== 'string' || /[?&]web=1(?:&|$)/i.test(url)) return url;
+            return `${url}${url.includes('?') ? '&' : '?'}web=1`;
+        }
+
         function getTracts(agreement) {
             return Array.isArray(agreement.tract) ? agreement.tract : [];
         }
@@ -398,7 +403,7 @@
                     { "title": "N-ième RCC, 2ème de 2026 – Retour sondage salariés", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2026/2026_06_TRACT-RetourSondageRCC2026-2.pdf" }
                 ],
                 "documents": [
-                    { "title": "Accord_RCC_2026.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202026/Accord_RCC_2026.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_RCC_2026_p54_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord_RCC_2026.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202026/Accord_RCC_2026.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_RCC_2026_p54_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -414,7 +419,7 @@
                 "cgtPosition": "Modalités électorales (vote électronique, calendrier, collèges, nombre de sièges, répartition H/F) négociées en commun avec Paris-Saclay et jugées conformes.",
                 "tract": "-",
                 "documents": [
-                    { "title": "2026 protocole accord prééctoral LANNION signé.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/2026%20protocole%20accord%20pr%C3%A9%C3%A9ctoral%20LANNION%20sign%C3%A9.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_2026_protocole_accord_preectoral_LANNION_signe_p11_signature.jpg?csf=1&web=1" }
+                    { "title": "2026 protocole accord prééctoral LANNION signé.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/2026%20protocole%20accord%20pr%C3%A9%C3%A9ctoral%20LANNION%20sign%C3%A9.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_2026_protocole_accord_preectoral_LANNION_signe_p11_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -430,7 +435,7 @@
                 "cgtPosition": "Modalités électorales (vote électronique, calendrier, collèges, nombre de sièges, répartition H/F, effectifs de référence) jugées conformes.",
                 "tract": "-",
                 "documents": [
-                    { "title": "2026 protocole accord préélectoral signé.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/2026%20protocole%20accord%20pr%C3%A9%C3%A9lectoral%20sign%C3%A9.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_2026_protocole_accord_preelectoral_signe_p11_signature.jpg?csf=1&web=1" }
+                    { "title": "2026 protocole accord préélectoral signé.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/2026%20protocole%20accord%20pr%C3%A9%C3%A9lectoral%20sign%C3%A9.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_2026_protocole_accord_preelectoral_signe_p11_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -446,7 +451,7 @@
                 "cgtPosition": "Accord technique : il formalise une délégation de la restauration à la Direction déjà en place, sans enjeu de fond défavorable.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Avenant nº 1 à l'Accord CSE du 21 septembre 2018.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/Avenant%20n%C2%BA%201%20%C3%A0%20l'Accord%20CSE%20du%2021%20septembre%202018.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Avenant_no_1_a_l_Accord_CSE_du_21_septembre_2018_p10_signature.jpg?csf=1&web=1" }
+                    { "title": "Avenant nº 1 à l'Accord CSE du 21 septembre 2018.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/Avenant%20n%C2%BA%201%20%C3%A0%20l'Accord%20CSE%20du%2021%20septembre%202018.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Avenant_no_1_a_l_Accord_CSE_du_21_septembre_2018_p10_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -462,7 +467,7 @@
                 "cgtPosition": "Pour : gains concrets au-delà du minimum légal, surtout le temps partiel choisi (TPC) prolongeable au-delà de 5 ans avec retraite et prévoyance prises en charge à 100 % ; aide de 200 € et jours de congé dédiés ; CSSCT associée aux études de poste. Contre : pas de moyens dédiés aux référents, élus écartés du pilotage (commission paritaire supprimée).",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord d'entreprise relatif à la situation de handicap NNF.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/Accord%20d'entreprise%20relatif%20%C3%A0%20la%20situation%20de%20handicap%20NNF.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_d_entreprise_relatif_a_la_situation_de_handicap_NNF_p15-16_signatures.jpg?csf=1&web=1" }
+                    { "title": "Accord d'entreprise relatif à la situation de handicap NNF.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/Accord%20d'entreprise%20relatif%20%C3%A0%20la%20situation%20de%20handicap%20NNF.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_d_entreprise_relatif_a_la_situation_de_handicap_NNF_p15-16_signatures.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -478,7 +483,7 @@
                 "cgtPosition": "Accord technique, aucun enjeu de fond défavorable.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord Etablissement Prorogation des Mandats CSE-E Lannion.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/Accord%20Etablissement%20Prorogation%20des%20Mandats%20CSE-E%20Lannion.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_Etablissement_Prorogation_des_Mandats_CSE_E_Lannion_p05_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord Etablissement Prorogation des Mandats CSE-E Lannion.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/Accord%20Etablissement%20Prorogation%20des%20Mandats%20CSE-E%20Lannion.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_Etablissement_Prorogation_des_Mandats_CSE_E_Lannion_p05_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -494,7 +499,7 @@
                 "cgtPosition": "Compromis assumé : loin de nos revendications, mais 2,15 % reste bon à prendre et les salariés en ont besoin. La CGT sait faire des compromis. Limites : aucune augmentation générale, individualisation.",
                 "tract": "-",
                 "documents": [
-                    { "title": "NAO_2026_Procès_verbal_d_accord_24 janvier_2026.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/NAO_2026_Proc%C3%A8s_verbal_d_accord_24%20janvier_2026.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_NAO_2026_Proces_verbal_d_accord_24_janvier_2026_p07_signature.jpg?csf=1&web=1" }
+                    { "title": "NAO_2026_Procès_verbal_d_accord_24 janvier_2026.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202026/NAO_2026_Proc%C3%A8s_verbal_d_accord_24%20janvier_2026.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_NAO_2026_Proces_verbal_d_accord_24_janvier_2026_p07_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -510,7 +515,7 @@
                 "cgtPosition": "Avenant de procédure sans contenu nouveau ; opposition maintenue à la RCC elle-même.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Avenant RCC 2025.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202025/Avenant%20RCC%202025.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Avenant_RCC_2025_p07_signature.jpg?csf=1&web=1" }
+                    { "title": "Avenant RCC 2025.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202025/Avenant%20RCC%202025.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Avenant_RCC_2025_p07_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -526,7 +531,7 @@
                 "cgtPosition": "Accord technique sans recul.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord Aménagement Temps Travail NPS 2026 (19 décembre 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Temps%20de%20travail/Accord%20Am%C3%A9nagement%20Temps%20Travail%20NPS%202026%20(19%20d%C3%A9cembre%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_Amenagement_Temps_Travail_NPS_2026_19_decembre_2025_p03_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord Aménagement Temps Travail NPS 2026 (19 décembre 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Temps%20de%20travail/Accord%20Am%C3%A9nagement%20Temps%20Travail%20NPS%202026%20(19%20d%C3%A9cembre%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_Amenagement_Temps_Travail_NPS_2026_19_decembre_2025_p03_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -544,7 +549,7 @@
                     { "title": "Pour ceux qui restent – La CGT n'accompagne pas l'euthanasie des télécoms en France", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract_pour_ceux_qui_restent.pdf" }
                 ],
                 "documents": [
-                    { "title": "Accord collectif portant sur une Rupture Conventionnelle Collective (RCC) au sein de Nokia Networks France (compressé).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202025/Accord%20collectif%20portant%20sur%20une%20Rupture%20Conventionnelle%20Collective%20(RCC)%20au%20sein%20de%20Nokia%20Networks%20France%20(compress%C3%A9).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_collectif_portant_sur_une_Rupture_Conventionnelle_Collective_RCC__p52_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord collectif portant sur une Rupture Conventionnelle Collective (RCC) au sein de Nokia Networks France (compressé).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202025/Accord%20collectif%20portant%20sur%20une%20Rupture%20Conventionnelle%20Collective%20(RCC)%20au%20sein%20de%20Nokia%20Networks%20France%20(compress%C3%A9).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_collectif_portant_sur_une_Rupture_Conventionnelle_Collective_RCC__p52_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -560,7 +565,7 @@
                 "cgtPosition": "Abondement concentré sur les actions Nokia, rémunération « TTC », exonérations de cotisations ; préférence pour un 13e mois cotisé.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord d'entreprise relatif au Plan d'Epargne Entreprise au sein de Nokia Networks France (16 décembre 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'entreprise%20relatif%20au%20Plan%20d'Epargne%20Entreprise%20au%20sein%20de%20Nokia%20Networks%20France%20(16%20d%C3%A9cembre%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_d_entreprise_relatif_au_Plan_d_Epargne_Entreprise_au_sein_de_Noki_p17-18_signatures.jpg?csf=1&web=1" }
+                    { "title": "Accord d'entreprise relatif au Plan d'Epargne Entreprise au sein de Nokia Networks France (16 décembre 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'entreprise%20relatif%20au%20Plan%20d'Epargne%20Entreprise%20au%20sein%20de%20Nokia%20Networks%20France%20(16%20d%C3%A9cembre%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_d_entreprise_relatif_au_Plan_d_Epargne_Entreprise_au_sein_de_Noki_p17-18_signatures.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -576,7 +581,7 @@
                 "cgtPosition": "Retraite par capitalisation contre la répartition, perte de cotisations sociales ; préférence pour un 13e mois cotisé.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord d'entreprise relatif au Plan d'Epargne Retraite d'Entreprise Collectif PERCOL (16 décembre 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'entreprise%20relatif%20au%20Plan%20d'Epargne%20Retraite%20d'Entreprise%20Collectif%20PERCOL%20(16%20d%C3%A9cembre%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_d_entreprise_relatif_au_Plan_d_Epargne_Retraite_d_Entreprise_Coll_p20-21_signatures.jpg?csf=1&web=1" }
+                    { "title": "Accord d'entreprise relatif au Plan d'Epargne Retraite d'Entreprise Collectif PERCOL (16 décembre 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'entreprise%20relatif%20au%20Plan%20d'Epargne%20Retraite%20d'Entreprise%20Collectif%20PERCOL%20(16%20d%C3%A9cembre%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_d_entreprise_relatif_au_Plan_d_Epargne_Retraite_d_Entreprise_Coll_p20-21_signatures.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -594,7 +599,7 @@
                     { "title": "Happy Thanksgiving chez Nokia – L'industrie française dindon de la farce", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract_rcc_2026.pdf" }
                 ],
                 "documents": [
-                    { "title": "GEPP PV de désaccord mis à signature.pdf", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/copies/GEPP%20PV%20de%20d%C3%A9saccord%20mis%20%C3%A0%20signature.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/cgt_GEPP_PV_de_desaccord_mis_a_signature_p12_signature.jpg?csf=1&web=1" }
+                    { "title": "GEPP PV de désaccord mis à signature.pdf", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/copies/GEPP%20PV%20de%20d%C3%A9saccord%20mis%20%C3%A0%20signature.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/cgt_GEPP_PV_de_desaccord_mis_a_signature_p12_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -610,7 +615,7 @@
                 "cgtPosition": "Contre : la CGT se méfie quand la Direction propose d'« augmenter » les salariés avec leur propre argent (monétisation des congés, repos transformé en argent) ; 5e semaine exclue mais logique banalisée. Points positifs reconnus : souplesse pour les salariés, jour supplémentaire à Lannion.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord CET (24 juillet 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20CET%20(24%20juillet%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_CET_24_juillet_2025_p13-14_signatures.jpg?csf=1&web=1" }
+                    { "title": "Accord CET (24 juillet 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20CET%20(24%20juillet%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_CET_24_juillet_2025_p13-14_signatures.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -626,7 +631,7 @@
                 "cgtPosition": "Signature négociée en échange de deux gains pour tous les salariés : frais de santé mieux pris en charge (60 %) et meilleur intéressement (4 %). Limites : aucune contrepartie salariale, gain sur l'intéressement limité à 4 ans.",
                 "tract": "-",
                 "documents": [
-                    { "title": "accord collectif relatif aux évolutions du régime AUXAD -VF.pdf", "url": "https://nokia.sharepoint.com/sites/BDESENNF-CSE-C/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FBDESENNF%2DCSE%2DC%2FShared%20Documents%2F05a%2E%20CSE%2DC%2FCSE%2DC%202025%2F03%2DCSE%2DC%20extraordinaire%209%20avril%202025%2Faccord%20collectif%20relatif%20aux%20%C3%A9volutions%20du%20r%C3%A9gime%20AUXAD%20%2DVF%2Epdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_accord_collectif_relatif_aux_evolutions_du_regime_AUXAD_VF_p06_signature.jpg?csf=1&web=1" }
+                    { "title": "accord collectif relatif aux évolutions du régime AUXAD -VF.pdf", "url": "https://nokia.sharepoint.com/:b:/r/sites/BDESENNF-CSE-C/Shared%20Documents/05a.%20CSE-C/CSE-C%202025/03-CSE-C%20extraordinaire%209%20avril%202025/accord%20collectif%20relatif%20aux%20%C3%A9volutions%20du%20r%C3%A9gime%20AUXAD%20-VF.pdf?d=wa55078e44a6a4994b282eaeb8585d27c&csf=1&web=1&e=Qi12JQ", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_accord_collectif_relatif_aux_evolutions_du_regime_AUXAD_VF_p06_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -642,7 +647,7 @@
                 "cgtPosition": "Pour : prise en charge employeur portée à 60 % (contre 50 %), gain jugé très important pour les salariés ; contrepartie de l'accord AUXAD.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Avenant frais de santé (9 avril 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Avenant%20frais%20de%20sant%C3%A9%20(9%20avril%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Avenant_frais_de_sante_9_avril_2025_p05-06_signatures.jpg?csf=1&web=1" }
+                    { "title": "Avenant frais de santé (9 avril 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Avenant%20frais%20de%20sant%C3%A9%20(9%20avril%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Avenant_frais_de_sante_9_avril_2025_p05-06_signatures.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -658,7 +663,7 @@
                 "cgtPosition": "Mêmes bases que l'accord précédent, qui a donné de bons niveaux d'intéressement ; part de la masse salariale dans la formule portée de 3 % à 4 %, en contrepartie de la signature AUXAD.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord d'intéressement 2025-2028.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'int%C3%A9ressement%202025-2028.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_d_interessement_2025_2028_p16_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord d'intéressement 2025-2028.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Accord%20d'int%C3%A9ressement%202025-2028.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_d_interessement_2025_2028_p16_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -676,7 +681,7 @@
                     { "title": "Salaires +0,68 % – Les négos ça ne marche pas, il faut se mobiliser", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract-salaires-2025.pdf" }
                 ],
                 "documents": [
-                    { "title": "Procès verbal NAO (désaccord) 2025 (27 mars 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Proc%C3%A8s%20verbal%20NAO%20(d%C3%A9saccord)%202025%20(27%20mars%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Proces_verbal_NAO_desaccord_2025_27_mars_2025_p11_signature.jpg?csf=1&web=1" }
+                    { "title": "Procès verbal NAO (désaccord) 2025 (27 mars 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Proc%C3%A8s%20verbal%20NAO%20(d%C3%A9saccord)%202025%20(27%20mars%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Proces_verbal_NAO_desaccord_2025_27_mars_2025_p11_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -692,7 +697,7 @@
                 "cgtPosition": "Pour : 1 jour de repos supplémentaire pour tous, aligné sur Paris-Saclay. Contre : prime de crèche (80 €/mois jusqu'aux 4 ans de l'enfant) fermée aux nouveaux entrants au 01/01/2026, congés familiaux supprimés ; risque de préparer un établissement unique NPS + Lannion.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Avenant Accord ARTT Lannion 20 03 2025.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Avenant%20Accord%20ARTT%20Lannion%2020%2003%202025.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Avenant_Accord_ARTT_Lannion_20_03_2025_p08_signature.jpg?csf=1&web=1" }
+                    { "title": "Avenant Accord ARTT Lannion 20 03 2025.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Avenant%20Accord%20ARTT%20Lannion%2020%2003%202025.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Avenant_Accord_ARTT_Lannion_20_03_2025_p08_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -708,7 +713,7 @@
                 "cgtPosition": "Aucune solution pour les salariés aux compteurs d'heures positifs (remise à zéro = heures non payées, non cotisées).",
                 "tract": "-",
                 "documents": [
-                    { "title": "Avenant Accord Horaire Variable Lannion 20 03 2025.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Avenant%20Accord%20Horaire%20Variable%20Lannion%2020%2003%202025.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Avenant_Accord_Horaire_Variable_Lannion_20_03_2025_p07_signature.jpg?csf=1&web=1" }
+                    { "title": "Avenant Accord Horaire Variable Lannion 20 03 2025.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Avenant%20Accord%20Horaire%20Variable%20Lannion%2020%2003%202025.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Avenant_Accord_Horaire_Variable_Lannion_20_03_2025_p07_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -726,7 +731,7 @@
                     { "title": "Avenant Télétravail : signer pour 40 centimes ? Chronique d'une occasion manquée", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2025/tract-avenant-TL-v2.pdf" }
                 ],
                 "documents": [
-                    { "title": "Avenant accord télétravail avril 2022.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Avenant%20accord%20t%C3%A9l%C3%A9travail%20avril%202022.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Avenant_accord_teletravail_avril_2022_p07_signature.jpg?csf=1&web=1" }
+                    { "title": "Avenant accord télétravail avril 2022.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202025/Avenant%20accord%20t%C3%A9l%C3%A9travail%20avril%202022.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Avenant_accord_teletravail_avril_2022_p07_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -742,7 +747,7 @@
                 "cgtPosition": "Accord technique sans recul.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord 2025 NPS - aménagement temps de travail (20 janvier 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Archive/SOP%20-%20Guidelines%20-%20HARMONIZED/Accord%202025%20NPS%20-%20am%C3%A9nagement%20temps%20de%20travail%20(20%20janvier%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_2025_NPS_amenagement_temps_de_travail_20_janvier_2025_p04_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord 2025 NPS - aménagement temps de travail (20 janvier 2025).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Archive/SOP%20-%20Guidelines%20-%20HARMONIZED/Accord%202025%20NPS%20-%20am%C3%A9nagement%20temps%20de%20travail%20(20%20janvier%202025).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_2025_NPS_amenagement_temps_de_travail_20_janvier_2025_p04_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -758,7 +763,7 @@
                 "cgtPosition": "Soutien à l'élargissement, demande d'un seuil préservant les congés des aidants.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord don de jours 14 novembre 2024.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20don%20de%20jours%2014%20novembre%202024.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_don_de_jours_14_novembre_2024_p11_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord don de jours 14 novembre 2024.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20don%20de%20jours%2014%20novembre%202024.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_don_de_jours_14_novembre_2024_p11_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -774,7 +779,7 @@
                 "cgtPosition": "Comme pour la GEPP, négociation menée pour la forme : Nokia n'a jamais cherché d'accord. Seuil inatteignable vu le déficit de NNF, donc aucune prime en pratique. Revendication : du salaire fixe plutôt que des primes.",
                 "tract": "-",
                 "documents": [
-                    { "title": "PV désaccord Partage de la valeur VS.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/PV%20d%C3%A9saccord%20Partage%20de%20la%20valeur%20VS.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_PV_desaccord_Partage_de_la_valeur_VS_p06_signature.jpg?csf=1&web=1" }
+                    { "title": "PV désaccord Partage de la valeur VS.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/PV%20d%C3%A9saccord%20Partage%20de%20la%20valeur%20VS.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_PV_desaccord_Partage_de_la_valeur_VS_p06_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -792,7 +797,7 @@
                     { "title": "Bilan de la RCC 2024 – Nokia a (encore) montré son vrai visage", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2024/tract_bilan_rcc24_v4.pdf" }
                 ],
                 "documents": [
-                    { "title": "Accord RCC 2024 (19 avril 2024).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202024/Accord%20RCC%202024%20(19%20avril%202024).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_RCC_2024_19_avril_2024_p47_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord RCC 2024 (19 avril 2024).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202024/Accord%20RCC%202024%20(19%20avril%202024).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_RCC_2024_19_avril_2024_p47_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -810,7 +815,7 @@
                     { "title": "NAO -> RCC -> REPEAT – L'urgence de la radicalité", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2024/tract_retour_salaires_2024_v1.pdf" }
                 ],
                 "documents": [
-                    { "title": "Avenant Procès-verbal de désaccord NAO 2024 (9 avril 2024).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Avenant%20Proc%C3%A8s-verbal%20de%20d%C3%A9saccord%20NAO%202024%20(9%20avril%202024).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Avenant_Proces_verbal_de_desaccord_NAO_2024_9_avril_2024_p05_signature.jpg?csf=1&web=1" }
+                    { "title": "Avenant Procès-verbal de désaccord NAO 2024 (9 avril 2024).pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Avenant%20Proc%C3%A8s-verbal%20de%20d%C3%A9saccord%20NAO%202024%20(9%20avril%202024).pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Avenant_Proces_verbal_de_desaccord_NAO_2024_9_avril_2024_p05_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -826,7 +831,7 @@
                 "cgtPosition": "Maintenir une instance d'examen des résultats des sociétés françaises du groupe.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord CGF.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accord%20CGF.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_CGF_p10_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord CGF.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accord%20CGF.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_CGF_p10_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -842,7 +847,7 @@
                 "cgtPosition": "Contre : nouvelle classification, fiches emplois et cotation des postes ; fin de la reconnaissance des diplômes et de l'expérience, salaire lié au poste, perte possible du statut cadre. Pour : CCN imposée par la branche, l'accord-cadre en encadre la mise en place dans l'entreprise.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord Etablissement NNF Lannion Mise en place accord cadre nouvelle CCN du 7 mars 2024.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20Etablissement%20NNF%20Lannion%20Mise%20en%20place%20accord%20cadre%20nouvelle%20CCN%20du%207%20mars%202024.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_Etablissement_NNF_Lannion_Mise_en_place_accord_cadre_nouvelle_CCN_p06_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord Etablissement NNF Lannion Mise en place accord cadre nouvelle CCN du 7 mars 2024.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20Etablissement%20NNF%20Lannion%20Mise%20en%20place%20accord%20cadre%20nouvelle%20CCN%20du%207%20mars%202024.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_Etablissement_NNF_Lannion_Mise_en_place_accord_cadre_nouvelle_CCN_p06_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -860,7 +865,7 @@
                     { "title": "Et toi alors, t'es coté combien ?", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/ncc%20cotation%203.pdf" }
                 ],
                 "documents": [
-                    { "title": "Accord cadre NPS nouvelle convention collective- 2024 signé.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20cadre%20NPS%20nouvelle%20convention%20collective-%202024%20sign%C3%A9.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_cadre_NPS_nouvelle_convention_collective_2024_signe_p06_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord cadre NPS nouvelle convention collective- 2024 signé.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20cadre%20NPS%20nouvelle%20convention%20collective-%202024%20sign%C3%A9.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_cadre_NPS_nouvelle_convention_collective_2024_signe_p06_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -876,7 +881,7 @@
                 "cgtPosition": "Contre : nouvelle classification, fiches emplois et cotation des postes ; fin de la reconnaissance des diplômes et de l'expérience, salaire lié au poste, perte possible du statut cadre. Pour : CCN imposée par la branche, l'accord-cadre en encadre la mise en place dans l'entreprise.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord collectif mise en place CCN.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20collectif%20mise%20en%20place%20CCN.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_collectif_mise_en_place_CCN_p06_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord collectif mise en place CCN.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20collectif%20mise%20en%20place%20CCN.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_collectif_mise_en_place_CCN_p06_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -892,7 +897,7 @@
                 "cgtPosition": "Fin d'une injustice pour ~400 salariés sous le taux nominal de leur grade.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord harmonisation taux variable cible salariés non sales du 19 décembre 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Archive/Archives/Accords%20Nokia/Accord%20harmonisation%20taux%20variable%20cible%20salari%C3%A9s%20non%20sales%20du%2019%20d%C3%A9cembre%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_harmonisation_taux_variable_cible_salaries_non_sales_du_19_decemb_p10_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord harmonisation taux variable cible salariés non sales du 19 décembre 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Archive/Archives/Accords%20Nokia/Accord%20harmonisation%20taux%20variable%20cible%20salari%C3%A9s%20non%20sales%20du%2019%20d%C3%A9cembre%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_harmonisation_taux_variable_cible_salaries_non_sales_du_19_decemb_p10_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -908,7 +913,7 @@
                 "cgtPosition": "Accord technique sans recul.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord aménagement temps travail NPS 2024.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20am%C3%A9nagement%20temps%20travail%20NPS%202024.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_amenagement_temps_travail_NPS_2024_p04_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord aménagement temps travail NPS 2024.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202024/Accord%20am%C3%A9nagement%20temps%20travail%20NPS%202024.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_amenagement_temps_travail_NPS_2024_p04_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -924,7 +929,7 @@
                 "cgtPosition": "Correction demandée par la CGT obtenue (« salaire fixe » au lieu de « salaire de base »).",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord de substitution non cadres - 30 novembre 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20de%20substitution%20non%20cadres%20-%2030%20novembre%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_de_substitution_non_cadres_30_novembre_2023_p09_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord de substitution non cadres - 30 novembre 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20de%20substitution%20non%20cadres%20-%2030%20novembre%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_de_substitution_non_cadres_30_novembre_2023_p09_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -942,7 +947,7 @@
                     { "title": "Volontariat RCC : des motifs de vigilance", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20Volontariat%20RCC.pdf" }
                 ],
                 "documents": [
-                    { "title": "Accord RCC 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202023/Accord%20RCC%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_RCC_2023_p49_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord RCC 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/Plan-de-transformation/RCC%202023/Accord%20RCC%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_RCC_2023_p49_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -960,7 +965,7 @@
                     { "title": "Brèves de printemps", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20br%C3%A8ves%20de%20printemps.pdf" }
                 ],
                 "documents": [
-                    { "title": "NAO 2023 - PV désaccord.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/NAO%202023%20-%20PV%20d%C3%A9saccord.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_NAO_2023_PV_desaccord_p10_signature.jpg?csf=1&web=1" }
+                    { "title": "NAO 2023 - PV désaccord.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/NAO%202023%20-%20PV%20d%C3%A9saccord.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_NAO_2023_PV_desaccord_p10_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -978,7 +983,7 @@
                     { "title": "Brèves de printemps", "url": "https://nokia.sharepoint.com/sites/CGT39/Shared%20Documents/salari%C3%A9s/tracts%20diffus%C3%A9s/2023/Tract%20br%C3%A8ves%20de%20printemps.pdf" }
                 ],
                 "documents": [
-                    { "title": "Accord égalité professionnelle.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20%C3%A9galit%C3%A9%20professionnelle.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_egalite_professionnelle_p20_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord égalité professionnelle.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20%C3%A9galit%C3%A9%20professionnelle.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_egalite_professionnelle_p20_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -994,7 +999,7 @@
                 "cgtPosition": "Accord technique sans recul.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord aménagement temps travail NPS 2023.pdf", "url": "https://nokia.sharepoint.com/:b:/r/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20am%C3%A9nagement%20temps%20travail%20NPS%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_amenagement_temps_travail_NPS_2023_p04_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord aménagement temps travail NPS 2023.pdf", "url": "https://nokia.sharepoint.com/:b:/r/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20am%C3%A9nagement%20temps%20travail%20NPS%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_amenagement_temps_travail_NPS_2023_p04_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -1010,7 +1015,7 @@
                 "cgtPosition": "Favorable : renforcement des moyens syndicaux (2 DS par OS à Lannion).",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord nombre délégués syndicaux Lannion 24 janvier 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20nombre%20d%C3%A9l%C3%A9gu%C3%A9s%20syndicaux%20Lannion%2024%20janvier%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_nombre_delegues_syndicaux_Lannion_24_janvier_2023_p04_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord nombre délégués syndicaux Lannion 24 janvier 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20nombre%20d%C3%A9l%C3%A9gu%C3%A9s%20syndicaux%20Lannion%2024%20janvier%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_nombre_delegues_syndicaux_Lannion_24_janvier_2023_p04_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -1026,7 +1031,7 @@
                 "cgtPosition": "Favorable : renforcement des moyens syndicaux (5 DS pour la CGT sur NPS).",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord augmentation nombre délégués syndicaux NPS 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20augmentation%20nombre%20d%C3%A9l%C3%A9gu%C3%A9s%20syndicaux%20NPS%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_augmentation_nombre_delegues_syndicaux_NPS_2023_p05_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord augmentation nombre délégués syndicaux NPS 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20augmentation%20nombre%20d%C3%A9l%C3%A9gu%C3%A9s%20syndicaux%20NPS%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_augmentation_nombre_delegues_syndicaux_NPS_2023_p05_signature.jpg?csf=1&web=1" }
                 ]
             },
             {
@@ -1042,7 +1047,7 @@
                 "cgtPosition": "Accord sur le régime de remboursement des frais de santé, sans recul identifié.",
                 "tract": "-",
                 "documents": [
-                    { "title": "Accord remboursement santé - 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20remboursement%20sant%C3%A9%20-%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/captures_signatures/rh_Accord_remboursement_sante_2023_p11_signature.jpg?csf=1&web=1" }
+                    { "title": "Accord remboursement santé - 2023.pdf", "url": "https://nokia.sharepoint.com/sites/HRLibrary/Controlled%20Documents/HR%20Regions/Europe%20South/France/HR%20SOPs-Guidelines-Policy/Harmonized/Accords%20conventions%202023/Accord%20remboursement%20sant%C3%A9%20-%202023.pdf", "signatureTarget": "https://nokia.sharepoint.com/:i:/r/sites/CGT39/Shared%20Documents/salari%C3%A9s/accords%20n%C3%A9goci%C3%A9s/negos_html_files/signatures/rh_Accord_remboursement_sante_2023_p11_signature.jpg?csf=1&web=1" }
                 ]
             }
         ];
@@ -1204,19 +1209,19 @@
                         const label = documents.length > 1
                             ? (document.title || getDocumentName(document.url))
                             : (isPending || isAgreement ? "Ouvrir l'accord" : "Ouvrir le PV de désaccord");
-                        return `<a class="agreement-link agreement-meta-link" href="${escapeHtml(document.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+                        return `<a class="agreement-link agreement-meta-link" href="${escapeHtml(openInBrowser(document.url))}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
                     });
                     const documentMetaLink = documents.length > 1
                         ? `<ul class="agreement-document-list">${documentMetaLinks.map(link => `<li>${link}</li>`).join('')}</ul>`
                         : documentMetaLinks.join('');
                     const signatureMetaLink = !isAgreement && !isPending ? '' : documents
                         .filter(document => document.signatureTarget)
-                        .map(document => `<a class="agreement-link agreement-meta-link" href="${escapeHtml(document.signatureTarget)}" target="_blank" rel="noopener noreferrer" title="Ouvrir la page de signatures">Voir les signatures ↗</a>`)
+                        .map(document => `<a class="agreement-link agreement-meta-link" href="${escapeHtml(openInBrowser(document.signatureTarget))}" target="_blank" rel="noopener noreferrer" title="Ouvrir la page de signatures">Voir les signatures ↗</a>`)
                         .join('');
                     const tractLinks = getTracts(agreement).map(tract => {
                         const title = escapeHtml(tract.title || 'Ouvrir le tract');
                         const link = tract.url
-                            ? `<a class="agreement-link agreement-tract-link" href="${escapeHtml(tract.url)}" target="_blank" rel="noopener noreferrer" title="Ouvrir le tract : ${title}">${title} ↗</a>`
+                            ? `<a class="agreement-link agreement-tract-link" href="${escapeHtml(openInBrowser(tract.url))}" target="_blank" rel="noopener noreferrer" title="Ouvrir le tract : ${title}">${title} ↗</a>`
                             : title;
                         return `<div class="agreement-tract-line agreement-content">Relire notre tract : ${link}</div>`;
                     }).join('');
